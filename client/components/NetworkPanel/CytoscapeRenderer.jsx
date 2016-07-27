@@ -7,7 +7,7 @@ import style from './style.css'
 const CYTOSCAPE_TAG = 'cy';
 
 // Original position will be used when layout is positions are available
-const DEF_LAYOUT = 'preset';
+const DEF_LAYOUT = 'cose';
 
 // Layout to be used when there is no layout information
 const DEF_NO_LAYOUT = 'cose';
@@ -48,6 +48,10 @@ export default class CytoscapeRenderer extends React.Component {
     cy.style(visualStyle)
     cy.add(network.elements.nodes)
     cy.add(network.elements.edges)
+    cy.layout({
+      name: 'cose',
+    })
+    cy.fit()
   }
 
   componentDidMount() {
@@ -80,7 +84,7 @@ export default class CytoscapeRenderer extends React.Component {
     console.log(nextProps)
     console.log(this.props)
 
-    const command = nextProps.commands.get('command')
+    const command = nextProps.commands.command
     if(command !== '') {
 
       const cy = this.state.cyjs
@@ -93,8 +97,8 @@ export default class CytoscapeRenderer extends React.Component {
       else if(command === 'zoomOut') {
         cy.zoom(cy.zoom() * 0.8)
       }
-      this.props.commandActions.setCommand('')
-      return;
+      this.props.commandActions.reset()
+      return
     }
 
     if (nextProps === undefined || nextProps.networkData === undefined) {
@@ -130,7 +134,7 @@ export default class CytoscapeRenderer extends React.Component {
           break
         case CY_EVENTS.unselect:
           let unselected = ev.cyTarget;
-          this.handleSelect(unselected)
+          // this.handleSelect(unselected)
           break
         default:
           break
@@ -141,5 +145,7 @@ export default class CytoscapeRenderer extends React.Component {
   handleSelect(selected) {
     console.log('--------- graph object selected')
     console.log(selected)
+    console.log(this.props)
+    this.props.eventActions.selected(selected)
   }
 }

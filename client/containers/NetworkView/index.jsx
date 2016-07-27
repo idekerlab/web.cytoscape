@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as networkSourceActions from '../../reducers/currentnetwork'
-import * as commandActions from '../../reducers/commands'
+// import * as commandActions from '../../reducers/commands'
+import * as commandActions from '../../actions/commands'
+import * as eventActions from '../../actions/cyjs'
 
 import NetworkViewer from '../../components/NetworkViewer'
 import {networkDownloadActions, networkActions} from 'cy-network-store'
@@ -31,11 +33,12 @@ class NetworkView extends Component {
 
     console.log("*** Viewer Container ***")
     console.log(this.props)
+    const networkId = this.props.params.uri
 
     const {
       networks, networkDownload,
       downloadActions, networkActions, currentNetwork,
-      commands, commandActions
+      commands, commandActions, events, eventActions
     } = this.props
 
     return (
@@ -49,6 +52,9 @@ class NetworkView extends Component {
           currentNetwork={currentNetwork}
           commands={commands}
           commandActions={commandActions}
+          events={events}
+          eventActions={eventActions}
+          networkId={networkId}
         />
       </MuiThemeProvider>
     )
@@ -61,6 +67,7 @@ function mapStateToProps(state) {
     networkDownload: state.cy_network.networkDownload,
     currentNetwork: state.app_manager.current_network,
     commands: state.app_manager.commands,
+    events: state.app_manager.cy_events,
   }
 }
 
@@ -71,6 +78,7 @@ function mapDispatchToProps(dispatch) {
     networkActions: bindActionCreators(networkActions, dispatch),
     networkSourceActions: bindActionCreators(networkSourceActions, dispatch),
     commandActions: bindActionCreators(commandActions, dispatch),
+    eventActions: bindActionCreators(eventActions, dispatch),
   }
 }
 

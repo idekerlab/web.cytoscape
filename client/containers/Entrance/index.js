@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import { browserHistory } from 'react-router'
 import * as networkSourceActions from '../../reducers/currentnetwork'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -31,7 +32,22 @@ const muiTheme = getMuiTheme({
 
 class Entrance extends Component {
 
+  componentWillMount() {
+    console.log('&&&&&&&&&&&&&&&&& path params')
+    const queryParams = this.props.location.query
+    const networkId = queryParams.url
+
+    console.log(networkId)
+    if(networkId !== undefined) {
+      // Redirect to network page
+      const encodedId = encodeURIComponent(networkId)
+      browserHistory.push('/networks/' + encodedId)
+    }
+  }
+
   render() {
+
+
     const {currentNetwork, networkSourceActions} = this.props
 
     return (

@@ -47,12 +47,19 @@ export default class SourceSelector extends Component {
 
   handleVisualize = event => {
     console.log("Handling---------------------")
-    console.log(this.refs)
     const node = this.refs.sourceUrl
     const networkUrl = node.input.value.trim()
     console.log(networkUrl)
+    console.log("$$$$$$$$$$$$$$$$$final URL---------------------")
+    console.log(encodeURI(networkUrl))
+    const networkId = encodeURIComponent(networkUrl)
     this.props.networkSourceActions.setCurrentNetwork(networkUrl)
-    browserHistory.push('/network')
+    browserHistory.push('/networks/' + networkId)
+  }
+
+  handleClear = event => {
+    const node = this.refs.sourceUrl
+    node.input.value = ''
   }
 
   render() {
@@ -102,6 +109,7 @@ export default class SourceSelector extends Component {
             label="Clear"
             style={{marginLeft: '1em'}}
             backgroundColor={Colors.teal800}
+            onClick={this.handleClear}
           />
           <FlatButton
             className={style.bottom2}

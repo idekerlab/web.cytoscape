@@ -17,7 +17,6 @@ const contentStyle = {
 };
 
 
-
 export default class ShareDialog extends Component {
   constructor(props) {
     super(props);
@@ -34,13 +33,16 @@ export default class ShareDialog extends Component {
 
   }
 
-  handleClose = () => {
+  createUrl = networkId => {
+    const fullUrl = window.location.href
+    const base = fullUrl.split('/networks')[0]
+    return base + '/?url=' + networkId
   }
+
 
   render() {
 
     console.log('************dialog')
-    console.log(this.props)
 
     const actions = [
       <FlatButton
@@ -50,11 +52,13 @@ export default class ShareDialog extends Component {
       />,
       <FlatButton
         icon={<ShareIcon />}
-        label="Share"
+        label="Close"
         primary={true}
         onTouchTap={this.props.onTouchTap}
       />
     ];
+
+    const url = this.createUrl(this.props.networkId)
 
     return (
       <Dialog
@@ -71,9 +75,14 @@ export default class ShareDialog extends Component {
             Share Visualization
           </h2>
           <TextField
+            ref='urlText'
             className={style.url}
+            fullWidth={true}
+            floatingLabelFixed={true}
+            floatingLabelStyle={{color: 'orange'}}
+            floatingLabelText="Copy this url to share:"
             id="text-field-default"
-            defaultValue="Encoded URL will be displayed here..."
+            defaultValue={url}
           />
 
         </div>

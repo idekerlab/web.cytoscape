@@ -28,7 +28,7 @@ export default class MainMenu extends Component {
   }
 
   render() {
-    let url = this.props.currentNetwork.get('url')
+    let url = this.props.networkId
     let network = undefined
 
     if(url === undefined || url === null || url === '') {
@@ -63,7 +63,6 @@ export default class MainMenu extends Component {
         <Divider />
 
         <List>
-          <Subheader>Summary</Subheader>
           <ListItem
             key={1}
             primaryText="Summary"

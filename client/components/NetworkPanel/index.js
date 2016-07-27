@@ -3,47 +3,27 @@ import CytoscapeRenderer from './CytoscapeRenderer'
 import Loading from '../Loading'
 
 
-import style from './style.css'
-
 export default class NetworkPanel extends Component {
 
   componentWillMount() {
-    console.log('--------- Comp WILL mount---------------')
-    const curNetworkUrl = this.props.currentNetwork.get('url')
-    if(curNetworkUrl === undefined || curNetworkUrl === '') {
-      return
-    }
-
+    console.log('--------- DOWNLOAD START!! --------------')
     this.props.downloadActions.downloadBegin()
-    this.props.downloadActions.download(curNetworkUrl)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('-------- Got New props---------------')
-    const newUrl = nextProps.currentNetwork.get('url')
-    const url = this.props.currentNetwork.get('url')
-
-    console.log(url)
-    console.log(newUrl)
-
-    if (url === '' || url !== newUrl) {
-      this.props.downloadActions.downloadBegin()
-      this.props.downloadActions.download(newUrl)
-    }
+    this.props.downloadActions.download(this.props.networkId)
   }
 
   render() {
-    console.log('called: VIewer renderer---------------')
-    const {commands, commandActions} = this.props
-    const url = this.props.currentNetwork.get('url')
-    const network = this.props.networks.get(url)
-    console.log(network)
+    const {
+      commands, commandActions, events,
+      eventActions, networkId } = this.props
 
+    const network = this.props.networks.get(networkId)
     if (network !== undefined) {
       return (
         <CytoscapeRenderer
           commands={commands}
           commandActions={commandActions}
+          events={events}
+          eventActions={eventActions}
           networkData={network}/>
       )
     } else {

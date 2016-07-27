@@ -17,12 +17,6 @@ const dStyle = {
 };
 
 
-const iconStyle = {
-  width: 40,
-  height: 40
-}
-
-
 export default class NetworkViewer extends Component {
 
   constructor(props) {
@@ -35,32 +29,36 @@ export default class NetworkViewer extends Component {
 
   openMenu = () => this.setState({open: !this.state.open});
 
-  handleHome() {
-    console.log("Back to home")
-  }
 
   handleShareDialogOpen = () => {
     this.setState({shareDialogOpen: !this.state.shareDialogOpen})
     console.log('Dialog state: ' + this.state.shareDialogOpen)
   };
 
-  handleClose = () => this.setState({open: false});
+  handleClose = () => this.setState({open: false})
+
+  createNameFromUrl = url => {
+    const parts = url.split('/')
+    console.log(parts)
+    return (parts[parts.length-1]).split('?')[0]
+  }
 
   render() {
 
     const {
       networks, networkDownload,
       downloadActions, networkActions,
-      currentNetwork, commands, commandActions
+      currentNetwork, commands, commandActions,
+      events, eventActions, networkId
     } = this.props
-    console.log('-----------p54')
+    console.log('-----------****************** Parent viewer')
     console.log(this.props)
 
     return (
 
       <div>
         <AppBar
-          title={'Data Source: ' + currentNetwork.get('url')}
+          title={'Network: ' + this.createNameFromUrl(networkId)}
           onLeftIconButtonTouchTap={this.openMenu}
 
           iconElementRight={
@@ -79,9 +77,11 @@ export default class NetworkViewer extends Component {
           networkDownload={networkDownload}
           networkActions={networkActions}
           downloadActions={downloadActions}
-          currentNetwork={currentNetwork}
           commands={commands}
           commandActions={commandActions}
+          events={events}
+          eventActions={eventActions}
+          networkId={networkId}
         />
 
         <Commands
@@ -90,6 +90,7 @@ export default class NetworkViewer extends Component {
 
 
         <ShareDialog
+          networkId={networkId}
           onTouchTap={this.handleShareDialogOpen}
           open={this.state.shareDialogOpen}/>
 
@@ -102,7 +103,7 @@ export default class NetworkViewer extends Component {
         >
           <MainMenu
             networks={networks}
-            currentNetwork={currentNetwork}
+            networkId={networkId}
           />
         </Drawer>
 

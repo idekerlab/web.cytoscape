@@ -18,7 +18,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Entrance}/>
-      <Route path="network" component={NetworkView}/>
+      <Route path="/networks/:uri" component={NetworkView}/>
     </Router>
   </Provider>,
   document.getElementById('root')
