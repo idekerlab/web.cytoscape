@@ -1,0 +1,119 @@
+.top {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1F272A;
+}
+
+.grid {
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+
+.lineBreak {
+    width: 100%;
+}
+
+.box1 {
+    width: 100%;
+    height: 40%;
+    /*background-color: #0b97c4;*/
+}
+
+.boxGrid {
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.gridCell {
+    /*flex: 0 0 auto;*/
+    width: auto;
+}
+
+.gridCell2 {
+    /*flex: 0 0 auto;*/
+    width: 100%;
+    border: none;
+}
+.gridCellFull {
+    flex: 0 0 100%;
+}
+
+.gridCellHalf {
+    flex: 0 0 50%;
+}
+
+.gridCenter {
+    align-items: center;
+    justify-content: center;
+}
+
+
+.title {
+    margin-top: -64px;
+    height: 80%;
+    width: 100%;
+
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.title h1 {
+    padding: 0;
+    font-weight: 100;
+    font-size: 7em;
+    height: 100%;
+    color: #FFFFFF;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 1.2em;
+    margin-top: 0.5em;
+    margin-left: 0.2em;
+    height: 100%;
+    color: #999999;
+    width: 25em;
+}
+
+.logo {
+    width: 12em;
+    margin: 1em;
+}
+
+.iconStyle {
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
+}
+
+.topFooter {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #EFEFEF;
+    text-align: center;
+}
+
+.topFooter a {
+    text-decoration: none;
+    color: #AAAAAA;
+}
+
+.topFooter a:visited {
+    color: inherit;
+}
