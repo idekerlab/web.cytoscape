@@ -23,11 +23,32 @@ import logo from '../../assets/images/cytoscape-logo-orange.svg'
 // TODO: Split into smaller sub-menus
 export default class MainMenu extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showCommands: true,
+      showAppBar: true
+    }
+  }
+
   handleHome = event => {
     browserHistory.push('/')
   }
 
+  handleShowCommands = event => {
+    const newState = !this.state.showCommands
+    this.props.uiStateActions.showCommands(newState)
+    this.state.showCommands = newState
+  }
+
+  handleShowAppBar = event => {
+    const newState = !this.state.showAppBar
+    this.props.uiStateActions.showAppBar(newState)
+    this.state.showAppBar = newState
+  }
+
   render() {
+
     let url = this.props.networkId
     let network = undefined
 
@@ -131,12 +152,22 @@ export default class MainMenu extends Component {
               <ListItem
                 key={1}
                 primaryText="Navigation buttons"
-                rightToggle={<Toggle defaultToggled={true}/>}
+                rightToggle={
+                  <Toggle
+                    defaultToggled={true}
+                    onToggle={this.handleShowCommands}
+                  />
+                }
               />,
               <ListItem
                 key={2}
                 primaryText="Toolbar"
-                rightToggle={<Toggle defaultToggled={true}/>}
+                rightToggle={
+                  <Toggle
+                    defaultToggled={true}
+                    onToggle={this.handleShowAppBar}
+                  />
+                }
               />
             ]}
           />

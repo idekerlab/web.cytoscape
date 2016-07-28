@@ -5,6 +5,7 @@ import * as networkSourceActions from '../../reducers/currentnetwork'
 // import * as commandActions from '../../reducers/commands'
 import * as commandActions from '../../actions/commands'
 import * as eventActions from '../../actions/cyjs'
+import * as uiStateActions from '../../actions/ui-state'
 
 import NetworkViewer from '../../components/NetworkViewer'
 import {networkDownloadActions, networkActions} from 'cy-network-store'
@@ -30,7 +31,6 @@ const muiTheme = getMuiTheme({
 class NetworkView extends Component {
 
   render() {
-
     console.log("*** Viewer Container ***")
     console.log(this.props)
     const networkId = this.props.params.uri
@@ -38,7 +38,8 @@ class NetworkView extends Component {
     const {
       networks, networkDownload,
       downloadActions, networkActions, currentNetwork,
-      commands, commandActions, events, eventActions
+      commands, commandActions, events, eventActions,
+      uiState, uiStateActions
     } = this.props
 
     return (
@@ -54,6 +55,8 @@ class NetworkView extends Component {
           commandActions={commandActions}
           events={events}
           eventActions={eventActions}
+          uiState={uiState}
+          uiStateActions={uiStateActions}
           networkId={networkId}
         />
       </MuiThemeProvider>
@@ -68,6 +71,7 @@ function mapStateToProps(state) {
     currentNetwork: state.app_manager.current_network,
     commands: state.app_manager.commands,
     events: state.app_manager.cy_events,
+    uiState: state.app_manager.ui_state,
   }
 }
 
@@ -79,6 +83,7 @@ function mapDispatchToProps(dispatch) {
     networkSourceActions: bindActionCreators(networkSourceActions, dispatch),
     commandActions: bindActionCreators(commandActions, dispatch),
     eventActions: bindActionCreators(eventActions, dispatch),
+    uiStateActions: bindActionCreators(uiStateActions, dispatch),
   }
 }
 

@@ -25,6 +25,12 @@ export default class Commands extends Component {
 
   render() {
 
+    const uiState = this.props.uiState
+
+    if(!uiState.get('showCommands')) {
+      return (<div></div>)
+    }
+
     return (
       <div className={classnames(style.bar, style.grid)}>
         <FloatingActionButton
