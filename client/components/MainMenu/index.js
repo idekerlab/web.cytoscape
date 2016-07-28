@@ -4,7 +4,6 @@ import { browserHistory } from 'react-router'
 import classnames from 'classnames'
 
 import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Settings from 'material-ui/svg-icons/action/settings'
 import HomeIcon from 'material-ui/svg-icons/action/home'
@@ -23,32 +22,21 @@ import logo from '../../assets/images/cytoscape-logo-orange.svg'
 // TODO: Split into smaller sub-menus
 export default class MainMenu extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showCommands: true,
-      showAppBar: true
-    }
-  }
-
   handleHome = event => {
     browserHistory.push('/')
   }
 
   handleShowCommands = event => {
-    const newState = !this.state.showCommands
-    this.props.uiStateActions.showCommands(newState)
-    this.state.showCommands = newState
+    const switched = this.refs.commands.state.switched
+    this.props.uiStateActions.showCommands(!switched)
   }
 
   handleShowAppBar = event => {
-    const newState = !this.state.showAppBar
-    this.props.uiStateActions.showAppBar(newState)
-    this.state.showAppBar = newState
+    const switched = this.refs.appBar.state.switched
+    this.props.uiStateActions.showAppBar(!switched)
   }
 
   render() {
-
     let url = this.props.networkId
     let network = undefined
 
@@ -68,6 +56,10 @@ export default class MainMenu extends Component {
         }
       }
     }
+
+    const uiState = this.props.uiState
+    const showAppBar = uiState.get('showAppBar')
+    const showCommands = uiState.get('showCommands')
 
     return (
       <div>
@@ -154,7 +146,8 @@ export default class MainMenu extends Component {
                 primaryText="Navigation buttons"
                 rightToggle={
                   <Toggle
-                    defaultToggled={true}
+                    ref="commands"
+                    toggled={showCommands}
                     onToggle={this.handleShowCommands}
                   />
                 }
@@ -164,7 +157,8 @@ export default class MainMenu extends Component {
                 primaryText="Toolbar"
                 rightToggle={
                   <Toggle
-                    defaultToggled={true}
+                    ref="appBar"
+                    toggled={showAppBar}
                     onToggle={this.handleShowAppBar}
                   />
                 }
