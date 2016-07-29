@@ -2,15 +2,11 @@ import {handleActions} from 'redux-actions'
 import {Map} from 'immutable'
 
 const defaultState = Map({
-  event: null,
-  value: {}
+  selected: ''
 })
 
 export default handleActions({
-  SELECTED: (state, action) => ({
-    event: 'SELECTED'
-  }),
-  UNSELECTED: (state, action) => ({
-    event: 'UNSELECTED'
-  })
+  SELECTED: (state, action) => (
+    state.set('selected', action.payload)
+  )
 }, defaultState)

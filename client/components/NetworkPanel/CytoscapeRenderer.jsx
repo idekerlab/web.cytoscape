@@ -7,7 +7,7 @@ import style from './style.css'
 const CYTOSCAPE_TAG = 'cy';
 
 // Original position will be used when layout is positions are available
-const DEF_LAYOUT = 'cose';
+const DEF_LAYOUT = 'preset'
 
 // Layout to be used when there is no layout information
 const DEF_NO_LAYOUT = 'cose';
@@ -49,7 +49,7 @@ export default class CytoscapeRenderer extends React.Component {
     cy.add(network.elements.nodes)
     cy.add(network.elements.edges)
     cy.layout({
-      name: 'cose',
+      name: DEF_LAYOUT,
     })
     cy.fit()
   }
@@ -130,7 +130,7 @@ export default class CytoscapeRenderer extends React.Component {
       switch (ev.originalEvent.type) {
         case CY_EVENTS.select:
           let selected = ev.cyTarget;
-          this.handleSelect(selected)
+          this.handleSelect(selected, ev)
           break
         case CY_EVENTS.unselect:
           let unselected = ev.cyTarget;
@@ -142,10 +142,10 @@ export default class CytoscapeRenderer extends React.Component {
     })
   }
 
-  handleSelect(selected) {
+  handleSelect(selected, ev) {
     console.log('--------- graph object selected')
-    console.log(selected)
-    console.log(this.props)
-    this.props.eventActions.selected(selected)
+    console.log(selected.data())
+    console.log(ev)
+    this.props.eventActions.selected(selected.data())
   }
 }

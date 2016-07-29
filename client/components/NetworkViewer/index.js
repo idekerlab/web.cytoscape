@@ -20,7 +20,15 @@ export default class NetworkViewer extends Component {
     } = this.props
 
     console.log('-----------****************** Parent viewer')
-    console.log(this.props)
+
+    const details = events
+    let label = details.get('selected')
+    console.log(details.get('selected'))
+    if(details === '') {
+      label = 'N/A'
+    } else {
+      label = details.get('selected').name
+    }
 
     return (
 
@@ -49,10 +57,17 @@ export default class NetworkViewer extends Component {
           uiState={uiState}
         />
 
-        <Drawer width={300} openSecondary={true} open={false}>
+        <Drawer
+          width={300}
+          openSecondary={true}
+          open={true}>
           <Toolbar>
             <ToolbarTitle text="Properties"/>
           </Toolbar>
+          <h1>Data</h1>
+          <h2>
+            {label}
+          </h2>
         </Drawer>
       </div>
     )

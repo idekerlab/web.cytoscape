@@ -6,7 +6,6 @@ import Loading from '../Loading'
 export default class NetworkPanel extends Component {
 
   componentWillMount() {
-    console.log('--------- DOWNLOAD START!! --------------')
     this.props.downloadActions.downloadBegin()
     this.props.downloadActions.download(this.props.networkId)
   }
