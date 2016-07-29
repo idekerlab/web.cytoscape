@@ -1,7 +1,3 @@
-/**
- * Created by kono on 2016/07/25.
- */
-
 import React, {Component} from 'react'
 import { browserHistory } from 'react-router'
 import {List, ListItem} from 'material-ui/List';
@@ -10,17 +6,13 @@ import Divider from 'material-ui/Divider';
 
 import StyleSelector from '../StyleSelector'
 
-import Checkbox from 'material-ui/Checkbox';
 import Settings from 'material-ui/svg-icons/action/settings'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import StyleIcon from 'material-ui/svg-icons/image/color-lens'
 import SummaryIcon from 'material-ui/svg-icons/action/info-outline'
 
-import FlatButton from 'material-ui/FlatButton'
 import Avatar from 'material-ui/Avatar'
-import IconButton from 'material-ui/IconButton';
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
-
 
 import style from './style.css'
 import classnames from 'classnames'

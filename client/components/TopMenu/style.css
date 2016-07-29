@@ -1,0 +1,9 @@
+.maniMenu {
+    background-color: red;
+    box-shadow: none;
+    display: inline-block;
+    float: left;
+    font-weight: 400;
+    width: 100px;
+    margin: 16px 32px 16px 0;
+}

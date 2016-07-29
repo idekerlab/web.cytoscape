@@ -23,8 +23,8 @@ export default class NetworkViewer extends Component {
 
     const details = events
     let label = details.get('selected')
-    console.log(details.get('selected'))
-    if(details === '') {
+    console.log(label)
+    if(label === null || label === undefined) {
       label = 'N/A'
     } else {
       label = details.get('selected').name
