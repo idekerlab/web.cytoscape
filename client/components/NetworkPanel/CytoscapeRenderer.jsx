@@ -134,7 +134,7 @@ export default class CytoscapeRenderer extends React.Component {
           break
         case CY_EVENTS.unselect:
           let unselected = ev.cyTarget;
-          // this.handleSelect(unselected)
+          this.handleUnselect(unselected)
           break
         default:
           break
@@ -147,5 +147,10 @@ export default class CytoscapeRenderer extends React.Component {
     console.log(selected.data())
     console.log(ev)
     this.props.eventActions.selected(selected.data())
+  }
+
+  handleUnselect(selected, ev) {
+    console.log('--------- graph object UNselected')
+    this.props.eventActions.unselected(selected.data())
   }
 }

@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 
 import ClosableAppBar from '../ClosableAppBar'
-import  {Toolbar, ToolbarTitle} from 'material-ui/Toolbar'
-import Drawer from 'material-ui/Drawer'
 import NetworkPanel from '../NetworkPanel'
+import PropertyPanel from '../PropertyPanel'
 
 import Commands from '../Commands'
 
@@ -20,15 +19,6 @@ export default class NetworkViewer extends Component {
     } = this.props
 
     console.log('-----------****************** Parent viewer')
-
-    const details = events
-    let label = details.get('selected')
-    console.log(label)
-    if(label === null || label === undefined) {
-      label = 'N/A'
-    } else {
-      label = details.get('selected').name
-    }
 
     return (
 
@@ -57,18 +47,10 @@ export default class NetworkViewer extends Component {
           uiState={uiState}
         />
 
-        <Drawer
-          width={300}
-          openSecondary={true}
-          open={true}>
-          <Toolbar>
-            <ToolbarTitle text="Properties"/>
-          </Toolbar>
-          <h1>Data</h1>
-          <h2>
-            {label}
-          </h2>
-        </Drawer>
+        <PropertyPanel
+          events={events}
+        />
+
       </div>
     )
   }

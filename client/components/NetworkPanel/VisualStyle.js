@@ -27,13 +27,13 @@ export const DEF_VISUAL_STYLE = [
   {
     selector: 'node:selected',
     style: {
-      'background-color': 'yellow'
+      'background-color': 'orange'
     }
   },
   {
     selector: 'edge:selected',
     style: {
-      'line-color': 'yellow',
+      'line-color': 'orange',
       'width': 6
     }
   }
