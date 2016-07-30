@@ -36,6 +36,28 @@ export default class MainMenu extends Component {
     this.props.uiStateActions.showAppBar(!switched)
   }
 
+  extractNdexData(cxData) {
+    const provenanceHistory = cxData.provenanceHistory
+
+    if(provenanceHistory === undefined || provenanceHistory === null) {
+      return []
+    }
+
+    const entity = provenanceHistory[0].entity
+    if(entity === undefined || entity === null) {
+      return []
+    }
+
+    const properties = entity.properties
+    if(properties === undefined || properties === null) {
+      return []
+    }
+
+    return properties
+  }
+
+
+
   render() {
     let url = this.props.networkId
     let network = undefined
@@ -48,12 +70,16 @@ export default class MainMenu extends Component {
     }
 
     let name = 'N/A'
+    let ndexMetadata = []
     if (network !== undefined) {
+      // Case 1: NDEx network
+      const ndexProps = network.get('cxData')
+      if(ndexProps !== undefined) {
+        ndexMetadata = this.extractNdexData(ndexProps)
+      }
+
       const data = network.get('data')
       if (data !== undefined) {
-        if (data.name !== undefined) {
-          name = data.name
-        }
       }
     }
 
@@ -76,30 +102,14 @@ export default class MainMenu extends Component {
         <Divider />
 
         <List>
-          <ListItem
-            key={1}
-            primaryText="Summary"
-            leftIcon={<SummaryIcon />}
-            initiallyOpen={true}
-            primaryTogglesNestedList={true}
-            nestedItems={[
-              <ListItem
-                key={1}
-                primaryText="Network Name:"
-                secondaryText={name}
-              />,
-              <ListItem
-                key={2}
-                primaryText="Description:"
-                secondaryText="N/A"
-              />,
-              <ListItem
-                key={3}
-                primaryText="Data Source:"
-                secondaryText={url}
+          {
+            ndexMetadata.map(keyVal => {
+              return <ListItem
+                secondaryText={keyVal['name']}
+                primaryText={keyVal['value']}
               />
-            ]}
-          />
+            })
+          }
         </List>
 
         <Divider />

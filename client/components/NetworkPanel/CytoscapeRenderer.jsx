@@ -48,9 +48,12 @@ export default class CytoscapeRenderer extends React.Component {
     cy.style(visualStyle)
     cy.add(network.elements.nodes)
     cy.add(network.elements.edges)
-    cy.layout({
-      name: DEF_LAYOUT,
-    })
+
+    if(visualStyle === DEF_VISUAL_STYLE) {
+      cy.layout({
+        name: DEF_NO_LAYOUT,
+      })
+    }
     cy.fit()
   }
 

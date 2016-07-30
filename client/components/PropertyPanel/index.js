@@ -44,17 +44,19 @@ export default class PropertyPanel extends Component {
 
     return (
       <Drawer
-        width={200}
+        width={250}
         openSecondary={true}
         open={this.state.open}>
         <Toolbar>
           <ToolbarTitle text="Properties"/>
         </Toolbar>
         <List>
-          <Subheader>Selected Object:</Subheader>
           {
             keys.map(keyVal => {
-              return <ListItem secondaryText={data[keyVal]} primaryText={keyVal} />
+              return <ListItem
+                secondaryText={keyVal}
+                primaryText={data[keyVal]}
+              />
             })
           }
         </List>

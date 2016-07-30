@@ -18,20 +18,6 @@ const contentStyle = {
 
 
 export default class ShareDialog extends Component {
-  constructor(props) {
-    super(props);
-    console.log('-----------CONST######==========')
-    console.log(props)
-
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log('-----------Froparent==========')
-    console.log(this.props)
-    console.log(nextProps)
-    console.log(nextState)
-
-  }
 
   createUrl = networkId => {
     const fullUrl = window.location.href
@@ -39,19 +25,12 @@ export default class ShareDialog extends Component {
     return base + '/?url=' + networkId
   }
 
-
   render() {
 
     console.log('************dialog')
 
     const actions = [
       <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.props.onTouchTap}
-      />,
-      <FlatButton
-        icon={<ShareIcon />}
         label="Close"
         primary={true}
         onTouchTap={this.props.onTouchTap}

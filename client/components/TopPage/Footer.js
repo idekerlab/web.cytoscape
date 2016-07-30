@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import classnames from 'classnames'
 
 import style from './style.css'
+import github from '../../assets/images/github.svg'
 
 
 export default class Footer extends Component {
@@ -11,7 +12,7 @@ export default class Footer extends Component {
       <footer className={classnames(style.topFooter, style.grid, style.boxGrid)}>
         <a href="">&copy; 2016 The Cytoscape Consortium</a>
         <a href='https://github.com/idekerlab/web.cytoscape' target='_blank'>
-          <img className={style.iconStyle} src='../../assets/images/github.svg'/>
+          <img className={style.iconStyle} src={github} />
         </a>
       </footer>
     )
