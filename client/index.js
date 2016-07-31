@@ -7,6 +7,7 @@ import React from 'react'
 // Containers
 import NetworkView from './containers/NetworkView'
 import Entrance from './containers/Entrance'
+import StartPage from './containers/StartPage'
 
 // Store
 import configure from './store'
@@ -18,6 +19,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Entrance}/>
+      <Route path="/start" component={StartPage}/>
       <Route path="/networks/:uri" component={NetworkView}/>
     </Router>
   </Provider>,

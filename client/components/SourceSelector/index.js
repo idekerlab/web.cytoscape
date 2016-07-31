@@ -3,6 +3,24 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import {browserHistory} from 'react-router'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
+
+const paperStyle = {
+  height: 300,
+  width: 300,
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
+
+const paperSelected = {
+  height: 300,
+  width: 300,
+  margin: 20,
+  borderWidth: 3,
+  textAlign: 'center',
+  display: 'inline-block'
+};
 
 import * as Colors from 'material-ui/styles/colors'
 
@@ -15,7 +33,7 @@ const NDEX_URL = 'http://ci-dev-serv.ucsd.edu:3001/ndex2cyjs/'
 
 
 const labelStyle = {
-  color: '#FFFFFF',
+  color: '#666666',
   fontWeight: 400
 }
 
@@ -43,9 +61,15 @@ export default class SourceSelector extends Component {
       selected: VALUES.ndex,
       helperText: NDEX,
       currentText: '',
+      shadow: 1,
+      cardBg: '#FFFFFF'
     };
 
   }
+
+  onMouseOver = () => this.setState({shadow: 2});
+  onMouseOut = () => this.setState({shadow: 1});
+  onCardClick = () => this.setState({cardBg: 'red'});
 
   sourceTypeSelected = (event, value) => {
     this.setState({
@@ -66,7 +90,7 @@ export default class SourceSelector extends Component {
   createUrl = value => {
     let url = value
 
-    switch(this.state.selected) {
+    switch (this.state.selected) {
       case VALUES.ndex:
         url = NDEX_URL + value
         break
@@ -113,60 +137,89 @@ export default class SourceSelector extends Component {
 
     return (
       <div className={style.selectorMain}>
-        <RadioButtonGroup
-          className={style.selectorBox}
-          name="dataSourceType"
-          defaultSelected={VALUES.ndex}
-          onChange={this.sourceTypeSelected}
-        >
-          <RadioButton
-            style={{width: '7em'}}
-            value={VALUES.ndex}
-            label="NDEx"
-            labelStyle={labelStyle}
-          />
-          <RadioButton
-            style={{width: '7em'}}
-            value={VALUES.url}
-            label="JSON"
-            labelStyle={labelStyle}
-          />
-          <RadioButton
-            style={{width: '7em'}}
-            value={VALUES.zip}
-            label="Zip"
-            labelStyle={disabledLabelStyle}
-            disabled={true}
-          />
-        </RadioButtonGroup>
 
         <div className={style.selectorBox}>
-          <TextField
-            className={style.bottom2}
-            ref='sourceUrl'
-            inputStyle={{color: '#FFFFFF'}}
-            hintText={this.state.helperText}
-            hintStyle={{color: '#CCCCCC'}}
-            onChange={this.handleChange}
-          />
+          <h1 className={style.title}> Select Data Source</h1>
+        </div>
 
-          <FlatButton
-            className={style.bottom2}
-            label="Clear"
-            style={{marginLeft: '1em'}}
-            backgroundColor={Colors.teal800}
-            onClick={this.handleClear}
-          />
-          <FlatButton
-            className={style.bottom2}
-            label="Visualize"
-            disabled={!isReady}
-            style={{marginLeft: '1em'}}
-            labelStyle={{fontWeight: 600}}
-            backgroundColor={Colors.orange700}
-            hoverColor={Colors.orange400}
-            onClick={this.handleVisualize}
-          />
+        <div className={style.selectorBox}>
+          <Paper className={style.source}
+                 style={{backgroundColor: this.state.cardBg}}
+                 onMouseOver={this.onMouseOver}
+                 onMouseOut={this.onMouseOut}
+                 onClick={this.onCardClick}
+                 zDepth={this.state.shadow}>
+
+          </Paper>
+
+          <Paper className={style.source}
+                 onMouseOver={this.onMouseOver}
+                 onMouseOut={this.onMouseOut}
+                 zDepth={this.state.shadow}/>
+          <Paper className={style.source}
+                 onMouseOver={this.onMouseOver}
+                 onMouseOut={this.onMouseOut}
+                 zDepth={this.state.shadow}/>
+        </div>
+
+        <div className={style.container}>
+          <div className={style.wrapper1}>
+            <div className={style.sourceBox}>
+              <RadioButtonGroup
+                name="dataSourceType"
+                defaultSelected={VALUES.ndex}
+                onChange={this.sourceTypeSelected}>
+                <RadioButton
+                  className={style.radio1}
+                  value={VALUES.ndex}
+                  label="NDEx"
+                  labelStyle={labelStyle}
+                />
+                <RadioButton
+                  className={style.radio1}
+                  value={VALUES.url}
+                  label="JSON"
+                  labelStyle={labelStyle}
+                />
+                <RadioButton
+                  className={style.radio1}
+                  value={VALUES.zip}
+                  label="Zip"
+                  labelStyle={disabledLabelStyle}
+                  disabled={true}
+                />
+              </RadioButtonGroup>
+            </div>
+
+            <div className={style.actionBox}>
+              <TextField
+                className={style.sourceText}
+                ref='sourceUrl'
+                inputStyle={{color: '#777777'}}
+                hintText={this.state.helperText}
+                hintStyle={{color: '#CCCCCC'}}
+                onChange={this.handleChange}
+              />
+
+              <FlatButton
+                className={style.bottom2}
+                label="Clear"
+                style={{marginLeft: '1em', flex: 1}}
+                backgroundColor={Colors.teal800}
+                onClick={this.handleClear}
+              />
+              <FlatButton
+                className={style.bottom2}
+                label="Visualize"
+                disabled={!isReady}
+                style={{marginLeft: '1em', flex: 1}}
+                labelStyle={{fontWeight: 600}}
+                backgroundColor={Colors.orange700}
+                hoverColor={Colors.orange400}
+                onClick={this.handleVisualize}
+              />
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import {browserHistory} from 'react-router'
 import AppBar from 'material-ui/AppBar'
 
 import Title from './Title'
@@ -36,26 +36,26 @@ export default class TopPage extends Component {
 
   render() {
 
-    const { currentNetwork, networkSourceActions } = this.props
+    const {currentNetwork, networkSourceActions} = this.props
 
     return (
-      <div className={style.top}>
-
+      <div>
         <AppBar
           style={{boxShadow: 'none'}}
           onLeftIconButtonTouchTap={this.handleTouchTap}
         >
         </AppBar>
-
-        <Title
-          currentNetwork={currentNetwork}
-          networkSourceActions={networkSourceActions}
-        />
-
         <TopMenu
           open={this.state.open}
           closeAction={this.handleRequestClose}
         />
+
+        <div className={style.top}>
+          <Title
+            currentNetwork={currentNetwork}
+            networkSourceActions={networkSourceActions}
+          />
+        </div>
 
         <Footer/>
       </div>

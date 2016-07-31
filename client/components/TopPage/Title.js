@@ -1,42 +1,56 @@
 import React, {Component} from 'react'
-import classnames from 'classnames'
 
+import {browserHistory} from 'react-router'
 import style from './style.css'
 import SourceSelector from '../SourceSelector'
+
+import FlatButton from 'material-ui/FlatButton';
+
+import * as Colors from 'material-ui/styles/colors'
 
 import logo from '../../assets/images/cytoscape-logo-white.svg'
 
 export default class Title extends Component {
 
+  handleStart = () => {
+    browserHistory.push('/start')
+  }
+
+
   render() {
     const {currentNetwork, networkSourceActions} = this.props
 
     return (
-      <div className={classnames(style.title, style.grid)}>
-        <div className={classnames(style.box1, style.grid, style.boxGrid)}>
-          <div>
+      <div className={style.title}>
+
+        <div className={style.row1}>
+          <div className={style.logoCol}>
             <img
-              className={classnames(style.logo)}
+              className={style.logoIcon}
               src={logo}
               alt="Cytoscape Logo"
             />
           </div>
+          i
 
-          <div className={style.gridCell}>
-            <h1>
+          <div className={style.col2}>
+            <div className={style.titleText}>
               cy.next &beta;
-            </h1>
-            <p className={classnames(style.description)}>
+            </div>
+            <div className={style.description}>
               Next generation platform for network authoring, analysis,
               visualization, and sharing
-            </p>
-          </div>
+            </div>
 
-          <div className={style.gridCell2}>
-            <SourceSelector
-              currentNetwork={currentNetwork}
-              networkSourceActions={networkSourceActions}
-            />
+            <div className={style.buttonLocation}>
+              <FlatButton
+                className={style.start}
+                backgroundColor={Colors.teal500}
+                hoverColor={Colors.teal200}
+                label="Start"
+                onClick={this.handleStart}
+              />
+            </div>
           </div>
         </div>
       </div>
