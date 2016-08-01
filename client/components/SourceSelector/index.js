@@ -1,48 +1,15 @@
 import React, {Component} from 'react'
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import {browserHistory} from 'react-router'
-import TextField from 'material-ui/TextField'
-import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 
+import UrlSource from './UrlSource'
+
 import logo from '../../assets/images/cytoscape-logo-orange.svg'
-
-const paperStyle = {
-  height: 300,
-  width: 300,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-};
-
-const paperSelected = {
-  height: 300,
-  width: 300,
-  margin: 20,
-  borderWidth: 3,
-  textAlign: 'center',
-  display: 'inline-block'
-};
-
-import * as Colors from 'material-ui/styles/colors'
 
 import style from './style.css'
 
 const NDEX_ID_REGEX = /[0-9a-f\-]{36,36}/
 const URL_REGEX = /^http/
-
-const NDEX_URL = 'http://ci-dev-serv.ucsd.edu:3001/ndex2cyjs/'
-
-
-const labelStyle = {
-  color: '#666666',
-  fontWeight: 400
-}
-
-const disabledLabelStyle = {
-  color: '#777777',
-}
-
 
 const NDEX = 'Enter NDEx ID...'
 const URL = 'Enter URL of JSON file...'
@@ -79,7 +46,6 @@ export default class SourceSelector extends Component {
       cardUrl: baseStyle,
       cardZip: baseStyle,
     };
-
   }
 
   onMouseOver = () => this.setState({shadow: 2});
@@ -137,18 +103,6 @@ export default class SourceSelector extends Component {
     browserHistory.push('/networks/' + networkId)
   }
 
-  createUrl = value => {
-    let url = value
-
-    switch (this.state.selected) {
-      case VALUES.ndex:
-        url = NDEX_URL + value
-        break
-      default:
-        break
-    }
-    return url
-  }
 
   handleClear = event => {
     const node = this.refs.sourceUrl
@@ -239,44 +193,14 @@ export default class SourceSelector extends Component {
           </Paper>
         </div>
 
-        <div className={style.container}>
-          <div className={style.wrapper1}>
-            <TextField
-              className={style.sourceText}
-              ref='sourceUrl'
-              inputStyle={{color: '#777777'}}
-              hintText={this.state.helperText}
-              hintStyle={{color: '#CCCCCC'}}
-              onChange={this.handleChange}
-            />
-
-          </div>
-        </div>
-
-        <div className={style.container}>
-          <div className={style.wrapper1}>
-
-            <div className={style.actionBox}>
-              <FlatButton
-                className={style.bottom2}
-                label="Clear"
-                style={{marginLeft: '1em', flex: 1}}
-                backgroundColor={Colors.teal800}
-                onClick={this.handleClear}
-              />
-              <FlatButton
-                className={style.bottom2}
-                label="Visualize"
-                disabled={!isReady}
-                style={{marginLeft: '1em', flex: 1}}
-                labelStyle={{fontWeight: 600}}
-                backgroundColor={Colors.orange700}
-                hoverColor={Colors.orange400}
-                onClick={this.handleVisualize}
-              />
-            </div>
-          </div>
-        </div>
+        <UrlSource
+          refs="source"
+          isReady={isReady}
+          selected={this.state.selected}
+          sources={VALUES}
+          handleChange={this.handleChange}
+          helperText={this.state.helperText}
+        />
       </div>
     )
   }

@@ -9,8 +9,6 @@ export default class Start extends Component {
 
   render() {
 
-    const {currentNetwork, networkSourceActions} = this.props
-
     return (
       <div>
         <div className={style.top}>
