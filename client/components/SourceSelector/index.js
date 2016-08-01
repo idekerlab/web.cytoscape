@@ -5,6 +5,8 @@ import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 
+import logo from '../../assets/images/cytoscape-logo-orange.svg'
+
 const paperStyle = {
   height: 300,
   width: 300,
@@ -52,6 +54,16 @@ const VALUES = {
   'zip': ZIP
 }
 
+const baseStyle = {
+  backgroundColor: 'white',
+  color: '#999999'
+}
+
+const selectedStyle = {
+  backgroundColor: '#C7E6E2',
+  color: '#333333'
+}
+
 export default class SourceSelector extends Component {
 
   constructor(props) {
@@ -62,14 +74,52 @@ export default class SourceSelector extends Component {
       helperText: NDEX,
       currentText: '',
       shadow: 1,
-      cardBg: '#FFFFFF'
+      selectedStyle: style.source,
+      cardNdex: selectedStyle,
+      cardUrl: baseStyle,
+      cardZip: baseStyle,
     };
 
   }
 
   onMouseOver = () => this.setState({shadow: 2});
   onMouseOut = () => this.setState({shadow: 1});
-  onCardClick = () => this.setState({cardBg: 'red'});
+
+  resetSelection = () => {
+    this.setState({
+      cardNdex: baseStyle,
+      cardUrl: baseStyle,
+      cardZip: baseStyle,
+    })
+  }
+
+  onNdexCardClick = () => {
+    this.resetSelection()
+    this.setState({
+      helperText: NDEX,
+      currentText: '',
+      selected: VALUES.ndex,
+      cardNdex: selectedStyle
+    })
+  }
+  onUrlCardClick = () => {
+    this.resetSelection()
+    this.setState({
+      helperText: URL,
+      currentText: '',
+      selected: VALUES.url,
+      cardUrl: selectedStyle
+    })
+  }
+  onZipCardClick = () => {
+    this.resetSelection()
+    this.setState({
+      helperText: ZIP,
+      currentText: '',
+      selected: VALUES.zip,
+      cardZip: selectedStyle
+    })
+  }
 
   sourceTypeSelected = (event, value) => {
     this.setState({
@@ -138,69 +188,75 @@ export default class SourceSelector extends Component {
     return (
       <div className={style.selectorMain}>
 
-        <div className={style.selectorBox}>
-          <h1 className={style.title}> Select Data Source</h1>
+        <div className={style.container}>
+          <div className={style.title}>
+            Select Data Source
+          </div>
         </div>
 
         <div className={style.selectorBox}>
-          <Paper className={style.source}
-                 style={{backgroundColor: this.state.cardBg}}
-                 onMouseOver={this.onMouseOver}
-                 onMouseOut={this.onMouseOut}
-                 onClick={this.onCardClick}
-                 zDepth={this.state.shadow}>
+          <Paper
+            className={style.source}
+            style={this.state.cardNdex}
+            onMouseOver={this.onMouseOver}
+            onMouseOut={this.onMouseOut}
+            onClick={this.onNdexCardClick}
+            zDepth={this.state.shadow}>
 
+            <h2>NDEx ID</h2>
+            <section>
+              Unique ID of NDEx network
+            </section>
           </Paper>
 
-          <Paper className={style.source}
-                 onMouseOver={this.onMouseOver}
-                 onMouseOut={this.onMouseOut}
-                 zDepth={this.state.shadow}/>
-          <Paper className={style.source}
-                 onMouseOver={this.onMouseOver}
-                 onMouseOut={this.onMouseOut}
-                 zDepth={this.state.shadow}/>
+          <Paper
+            className={style.source}
+            style={this.state.cardUrl}
+            onMouseOver={this.onMouseOver}
+            onMouseOut={this.onMouseOut}
+            onClick={this.onUrlCardClick}
+            zDepth={this.state.shadow}
+          >
+            <h2>Cytosvape.js JSON</h2>
+            <section>
+              URL of JSON file in Cytoscape.js format
+            </section>
+
+          </Paper>
+          <Paper
+            className={style.source}
+            style={this.state.cardZip}
+            onMouseOver={this.onMouseOver}
+            onMouseOut={this.onMouseOut}
+            onClick={this.onZipCardClick}
+            zDepth={this.state.shadow}>
+            <h2>Zipped Archive</h2>
+            <section>
+              Zipped file exported from Cytoscape 3
+              <br />
+              (Coming Soon...)
+            </section>
+          </Paper>
         </div>
 
         <div className={style.container}>
           <div className={style.wrapper1}>
-            <div className={style.sourceBox}>
-              <RadioButtonGroup
-                name="dataSourceType"
-                defaultSelected={VALUES.ndex}
-                onChange={this.sourceTypeSelected}>
-                <RadioButton
-                  className={style.radio1}
-                  value={VALUES.ndex}
-                  label="NDEx"
-                  labelStyle={labelStyle}
-                />
-                <RadioButton
-                  className={style.radio1}
-                  value={VALUES.url}
-                  label="JSON"
-                  labelStyle={labelStyle}
-                />
-                <RadioButton
-                  className={style.radio1}
-                  value={VALUES.zip}
-                  label="Zip"
-                  labelStyle={disabledLabelStyle}
-                  disabled={true}
-                />
-              </RadioButtonGroup>
-            </div>
+            <TextField
+              className={style.sourceText}
+              ref='sourceUrl'
+              inputStyle={{color: '#777777'}}
+              hintText={this.state.helperText}
+              hintStyle={{color: '#CCCCCC'}}
+              onChange={this.handleChange}
+            />
+
+          </div>
+        </div>
+
+        <div className={style.container}>
+          <div className={style.wrapper1}>
 
             <div className={style.actionBox}>
-              <TextField
-                className={style.sourceText}
-                ref='sourceUrl'
-                inputStyle={{color: '#777777'}}
-                hintText={this.state.helperText}
-                hintStyle={{color: '#CCCCCC'}}
-                onChange={this.handleChange}
-              />
-
               <FlatButton
                 className={style.bottom2}
                 label="Clear"
