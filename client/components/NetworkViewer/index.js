@@ -15,10 +15,9 @@ export default class NetworkViewer extends Component {
       networks, networkDownload,
       downloadActions, networkActions,
       commands, commandActions,
-      events, eventActions, networkId, uiState, uiStateActions
+      events, eventActions, networkId, uiState, uiStateActions,
+      styles, currentVs, currentVsActions
     } = this.props
-
-    console.log('-----------****************** Parent viewer')
 
     return (
 
@@ -28,6 +27,8 @@ export default class NetworkViewer extends Component {
           networks={networks}
           uiState={uiState}
           uiStateActions={uiStateActions}
+          styles={styles}
+          currentVsActions={currentVsActions}
         />
 
         <NetworkPanel
@@ -40,6 +41,8 @@ export default class NetworkViewer extends Component {
           events={events}
           eventActions={eventActions}
           networkId={networkId}
+          styles={styles}
+          currentVs={currentVs}
         />
 
         <Commands

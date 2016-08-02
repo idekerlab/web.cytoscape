@@ -25,7 +25,8 @@ export default class CytoscapeRenderer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      rendered: false
+      rendered: false,
+      vs: 'default'
     }
   }
 
@@ -83,10 +84,7 @@ export default class CytoscapeRenderer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("*****Network prop changed, updating cytoscapejs")
-    console.log(nextProps)
-    console.log(this.props)
-
+    console.log('CYJS ____________ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     const command = nextProps.commands.command
     if(command !== '') {
 
@@ -103,6 +101,21 @@ export default class CytoscapeRenderer extends React.Component {
       this.props.commandActions.reset()
       return
     }
+
+
+    // Style
+    const curVs = this.state.vs
+    const nextVs = nextProps.currentVs.get('vsName')
+    if(curVs !== nextVs) {
+      const vs = this.props.styles.get(nextVs)
+      this.state.cyjs.style(vs)
+      this.setState({
+        vs: nextVs
+      })
+
+      return;
+    }
+
 
     if (nextProps === undefined || nextProps.networkData === undefined) {
       console.log("=========== NO DATA");

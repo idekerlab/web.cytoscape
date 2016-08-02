@@ -20,6 +20,15 @@ export default class UrlSource extends Component {
     const networkUrl = node.input.value.trim()
     const url = this.createUrl(networkUrl)
     const networkId = encodeURIComponent(url)
+
+    const vsNode = this.refs.vsUrl
+    const styleUrl = vsNode.input.value.trim()
+
+    console.log('---------- Loading style -------------')
+    console.log(this.props)
+    console.log(styleUrl)
+    const test1 = 'https://raw.githubusercontent.com/cytoscape/cyjs-sample/03d586d207d51397dcf4f3d8877a01f4a01cc1d8/app/data/style.json'
+    this.props.vsActions.fetchVisualStyles(test1)
     browserHistory.push('/networks/' + networkId)
   }
 

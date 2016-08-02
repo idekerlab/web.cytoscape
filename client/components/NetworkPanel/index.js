@@ -13,7 +13,7 @@ export default class NetworkPanel extends Component {
   render() {
     const {
       commands, commandActions, events,
-      eventActions, networkId } = this.props
+      eventActions, networkId, styles, currentVs } = this.props
 
     const network = this.props.networks.get(networkId)
     if (network !== undefined) {
@@ -23,7 +23,10 @@ export default class NetworkPanel extends Component {
           commandActions={commandActions}
           events={events}
           eventActions={eventActions}
-          networkData={network}/>
+          networkData={network}
+          styles={styles}
+          currentVs={currentVs}
+        />
       )
     } else {
       // Display loading animation if data is not available

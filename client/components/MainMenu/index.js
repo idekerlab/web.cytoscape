@@ -8,7 +8,6 @@ import Divider from 'material-ui/Divider';
 import Settings from 'material-ui/svg-icons/action/settings'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import StyleIcon from 'material-ui/svg-icons/image/color-lens'
-import SummaryIcon from 'material-ui/svg-icons/action/info-outline'
 import Avatar from 'material-ui/Avatar'
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 import Toggle from 'material-ui/Toggle';
@@ -57,7 +56,6 @@ export default class MainMenu extends Component {
   }
 
 
-
   render() {
     let url = this.props.networkId
     let network = undefined
@@ -86,6 +84,8 @@ export default class MainMenu extends Component {
     const uiState = this.props.uiState
     const showAppBar = uiState.get('showAppBar')
     const showCommands = uiState.get('showCommands')
+    const styles = this.props.styles
+    const {currentVsActions} = this.props
 
     return (
       <div>
@@ -135,7 +135,10 @@ export default class MainMenu extends Component {
               </ListItem>,
 
               <ListItem key={2}>
-                <StyleSelector className={style.subtitle}/>
+                <StyleSelector
+                  styles={styles}
+                  currentVsActions={currentVsActions}
+                  className={style.subtitle}/>
               </ListItem>
             ]}
           />

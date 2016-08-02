@@ -2,12 +2,6 @@ import React, {Component} from 'react'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const items = [
-  <MenuItem key={1} value={1} primaryText="default"/>,
-  <MenuItem key={2} value={2} primaryText="Style 1"/>,
-  <MenuItem key={3} value={3} primaryText="Directed"/>,
-];
-
 
 const style = {
   color: '#777777',
@@ -18,12 +12,26 @@ class StyleSelector extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: null};
+    this.state = {
+      value: 'default'
+    }
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange = (event, index, value) => {
+    this.setState({value})
+    this.props.currentVsActions.setCurrentVs(value)
+  }
 
   render() {
+    const styleNames = this.props.styles.keys()
+    const items = []
+
+    let count = 1
+    for (let styleName of styleNames) {
+      items.push(<MenuItem key={count} value={styleName} primaryText={styleName}/>)
+      count++
+    }
+
     return (
       <div>
         <SelectField

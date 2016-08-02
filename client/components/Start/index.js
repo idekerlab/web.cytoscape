@@ -12,7 +12,9 @@ export default class Start extends Component {
     return (
       <div>
         <div className={style.top}>
-          <SourceSelector />
+          <SourceSelector
+            vsActions={this.props.vsActions}
+          />
         </div>
       </div>
     )

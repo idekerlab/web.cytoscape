@@ -87,22 +87,6 @@ export default class SourceSelector extends Component {
     })
   }
 
-  sourceTypeSelected = (event, value) => {
-    this.setState({
-      selected: value,
-      helperText: VALUES[value],
-      currentText: ''
-    })
-  }
-
-  handleVisualize = event => {
-    const node = this.refs.sourceUrl
-    const networkUrl = node.input.value.trim()
-    const url = this.createUrl(networkUrl)
-    const networkId = encodeURIComponent(url)
-    browserHistory.push('/networks/' + networkId)
-  }
-
 
   handleClear = event => {
     const node = this.refs.sourceUrl
@@ -200,6 +184,7 @@ export default class SourceSelector extends Component {
           sources={VALUES}
           handleChange={this.handleChange}
           helperText={this.state.helperText}
+          vsActions={this.props.vsActions}
         />
       </div>
     )

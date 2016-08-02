@@ -3,7 +3,7 @@ import { Map } from 'immutable'
 const SET_CURRENT_VS = 'SET_CURRENT_VS'
 
 const defaultState = Map({
-  vsName: ''
+  vsName: 'default'
 })
 
 export default function currentVisualStyleState(state = defaultState, action) {
@@ -15,7 +15,6 @@ export default function currentVisualStyleState(state = defaultState, action) {
       return state
   }
 }
-
 
 export function setCurrentVs(vsName) {
   return {

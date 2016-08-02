@@ -39,7 +39,8 @@ export default class ClosableAppBar extends Component {
 
 
   render() {
-    const {uiState, uiStateActions, networks, networkId,} = this.props
+    const {uiState, uiStateActions, networks, networkId,
+      styles, currentVsActions} = this.props
 
     if (!uiState.get('showAppBar')) {
       return (
@@ -64,6 +65,8 @@ export default class ClosableAppBar extends Component {
               networkId={networkId}
               uiState={uiState}
               uiStateActions={uiStateActions}
+              styles={styles}
+              currentVsActions={currentVsActions}
             />
           </Drawer>
         </div>
@@ -103,6 +106,8 @@ export default class ClosableAppBar extends Component {
             networkId={networkId}
             uiState={uiState}
             uiStateActions={uiStateActions}
+            styles={styles}
+            currentVsActions={currentVsActions}
           />
         </Drawer>
       </div>

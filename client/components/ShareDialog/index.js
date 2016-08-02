@@ -25,9 +25,15 @@ export default class ShareDialog extends Component {
     return base + '/?url=' + networkId
   }
 
-  render() {
+  shouldComponentUpdate(nextProp, nextState) {
+    if(nextProp.open === false && this.props.open === false) {
+      return false
+    } else {
+      return true
+    }
+  }
 
-    console.log('************dialog')
+  render() {
 
     const actions = [
       <FlatButton

@@ -6,6 +6,8 @@ import * as networkSourceActions from '../../reducers/currentnetwork'
 import * as commandActions from '../../actions/commands'
 import * as eventActions from '../../actions/cyjs'
 import * as uiStateActions from '../../actions/ui-state'
+import * as vsActions from '../../reducers/visualstyles'
+import * as currentVsActions from '../../reducers/currentvs'
 
 import NetworkViewer from '../../components/NetworkViewer'
 import {networkDownloadActions, networkActions} from 'cy-network-store'
@@ -35,29 +37,12 @@ class NetworkView extends Component {
     console.log(this.props)
     const networkId = this.props.params.uri
 
-    const {
-      networks, networkDownload,
-      downloadActions, networkActions, currentNetwork,
-      commands, commandActions, events, eventActions,
-      uiState, uiStateActions
-    } = this.props
-
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <NetworkViewer
-          className={style.main}
-          networks={networks}
-          networkDownload={networkDownload}
-          networkActions={networkActions}
-          downloadActions={downloadActions}
-          currentNetwork={currentNetwork}
-          commands={commands}
-          commandActions={commandActions}
-          events={events}
-          eventActions={eventActions}
-          uiState={uiState}
-          uiStateActions={uiStateActions}
+          {...this.props}
           networkId={networkId}
+          className={style.main}
         />
       </MuiThemeProvider>
     )
@@ -72,6 +57,8 @@ function mapStateToProps(state) {
     commands: state.app_manager.commands,
     events: state.app_manager.cy_events,
     uiState: state.app_manager.ui_state,
+    styles: state.visual_styles,
+    currentVs: state.app_manager.current_vs,
   }
 }
 
@@ -84,6 +71,8 @@ function mapDispatchToProps(dispatch) {
     commandActions: bindActionCreators(commandActions, dispatch),
     eventActions: bindActionCreators(eventActions, dispatch),
     uiStateActions: bindActionCreators(uiStateActions, dispatch),
+    vsActions: bindActionCreators(vsActions, dispatch),
+    currentVsActions: bindActionCreators(currentVsActions, dispatch),
   }
 }
 
