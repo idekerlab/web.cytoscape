@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {browserHistory} from 'react-router'
 import AppBar from 'material-ui/AppBar'
 
 import Title from './Title'
@@ -13,7 +12,6 @@ export default class TopPage extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       open: false,
     };
@@ -21,26 +19,22 @@ export default class TopPage extends Component {
 
   handleTouchTap = (event) => {
     event.preventDefault();
-
     this.setState({
       open: true,
     })
   }
 
   handleRequestClose = () => {
-    console.log('============cclose')
     this.setState({
       open: false,
     })
   }
 
   render() {
-    const {currentNetwork, networkSourceActions,
-      datasourceActions} = this.props
-
-    console.log('+++++++++++++++++ DS1')
-    console.log(this.props)
-
+    const {
+      currentNetwork, networkSourceActions,
+      datasourceActions
+    } = this.props
     return (
       <div>
         <AppBar

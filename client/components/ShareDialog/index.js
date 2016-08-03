@@ -1,16 +1,13 @@
 import React, {Component} from 'react'
-
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
-
 
 import logo from '../../assets/images/cytoscape-logo-orange.svg'
 import style from './style.css'
 
-import ShareIcon from 'material-ui/svg-icons/social/share';
 
+const DEFAULT = '../../assets/preset-styles.json'
 
 const contentStyle = {
   width: '400px',
@@ -22,9 +19,14 @@ export default class ShareDialog extends Component {
   createUrl = (networkId, styleName, bg, styleSource) => {
     const fullUrl = window.location.href
     const base = fullUrl.split('/networks')[0]
-    return base + '/?url=' + networkId + '&style='
-      + styleName + '&bgcolor=' + bg + '&stylesource=' + styleSource
+    let encoded = base + '/?url=' + networkId + '&style='
+      + styleName + '&bgcolor=' + bg
+    if(styleSource !== undefined && styleSource !== null && styleSource !== DEFAULT) {
+      encoded += '&stylesource=' + styleSource
+    }
+    return encoded
   }
+
 
   shouldComponentUpdate(nextProp, nextState) {
     if(nextProp.open === false && this.props.open === false) {

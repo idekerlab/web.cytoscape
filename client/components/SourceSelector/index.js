@@ -1,10 +1,6 @@
 import React, {Component} from 'react'
-import {browserHistory} from 'react-router'
 import Paper from 'material-ui/Paper';
-
 import UrlSource from './UrlSource'
-
-import logo from '../../assets/images/cytoscape-logo-orange.svg'
 
 import style from './style.css'
 
@@ -102,6 +98,7 @@ export default class SourceSelector extends Component {
         valid = this.validateNdex(val)
         break
       case VALUES.url:
+      case VALUES.zip:
         valid = this.validateUrl(val)
         break
       default:
@@ -171,8 +168,6 @@ export default class SourceSelector extends Component {
             <h2>Zipped Archive</h2>
             <section>
               Zipped file exported from Cytoscape 3
-              <br />
-              (Coming Soon...)
             </section>
           </Paper>
         </div>
@@ -186,6 +181,7 @@ export default class SourceSelector extends Component {
           helperText={this.state.helperText}
           vsActions={this.props.vsActions}
           datasourceActions={this.props.datasourceActions}
+          networkActions={this.props.networkActions}
         />
       </div>
     )

@@ -32,9 +32,9 @@ const muiTheme = getMuiTheme({
  * Base component for the network viewer page.
  */
 class NetworkView extends Component {
+
+
   render() {
-    console.log("*** Viewer Container ***")
-    console.log(this.props)
     const networkId = this.props.params.uri
 
     return (

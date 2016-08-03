@@ -43,9 +43,6 @@ export default class ClosableAppBar extends Component {
       styles, currentVsActions, backgroundColorActions,
       backgroundColor, currentVs, datasource} = this.props
 
-    console.log('*************** DS')
-    console.log(this.props)
-
     if (!uiState.get('showAppBar')) {
       return (
         <div>

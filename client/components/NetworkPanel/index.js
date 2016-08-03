@@ -7,7 +7,13 @@ export default class NetworkPanel extends Component {
 
   componentWillMount() {
     this.props.downloadActions.downloadBegin()
-    this.props.downloadActions.download(this.props.networkId)
+
+    const networkLocation = this.props.networkId
+    if(networkLocation.endsWith('zip')) {
+      // Do nothing.  Network already loaded.
+    } else {
+      this.props.downloadActions.download(networkLocation)
+    }
   }
 
   render() {

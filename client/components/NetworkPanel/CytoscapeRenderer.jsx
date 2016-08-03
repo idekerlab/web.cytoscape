@@ -1,16 +1,10 @@
 import React from "react"
-import cytoscape from "cytoscape"
-import {DEF_VISUAL_STYLE} from "./VisualStyle"
-import style from './style.css'
 
-// TODO: consolidate Cytoscape-dependent tags
-const CYTOSCAPE_TAG = 'cy';
+import cytoscape from "cytoscape"
+import style from './style.css'
 
 // Original position will be used when layout is positions are available
 const DEF_LAYOUT = 'preset'
-
-// Layout to be used when there is no layout information
-const DEF_NO_LAYOUT = 'cose';
 
 const CY_EVENTS = {
   select: "select",
@@ -30,17 +24,14 @@ export default class CytoscapeRenderer extends React.Component {
     }
   }
 
-  componentWillMount() {
-    // Check key
-    if(this.props.rendId === undefined || this.props.rendId === null) {
-      console.error('Key is required!')
-    }
-
-  }
 
   updateCyjs(networkData) {
     console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Cytoscape.js is rendering new network...')
     console.log(this.props)
+
+    if(networkData === undefined || networkData === null) {
+      return;
+    }
 
     this.state.rendered = true
 
@@ -89,6 +80,12 @@ export default class CytoscapeRenderer extends React.Component {
     // React is responsible only for the root Cytoscape tag.
     // and in this section, the only thing we need to check is background and network.
     console.log("$$$$$$$$$ Checking props")
+    if(!this.state.rendered) {
+      console.log("$$$$$$$$$ NEED rendering")
+      this.updateCyjs(this.props.networkData)
+      return true
+    }
+
     if (nextProps.networkData === this.props.networkData) {
       // Is this background update?
       if(nextProps.backgroundColor === this.props.backgroundColor) {

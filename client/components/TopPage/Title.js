@@ -1,21 +1,19 @@
 import React, {Component} from 'react'
 
 import {browserHistory} from 'react-router'
-import style from './style.css'
-import SourceSelector from '../SourceSelector'
-
 import FlatButton from 'material-ui/FlatButton';
 
 import * as Colors from 'material-ui/styles/colors'
 
 import logo from '../../assets/images/cytoscape-logo-white.svg'
+import style from './style.css'
+
 
 export default class Title extends Component {
 
   handleStart = () => {
     browserHistory.push('/start')
   }
-
 
   render() {
     const {currentNetwork, networkSourceActions} = this.props

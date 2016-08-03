@@ -31,18 +31,13 @@ export function fetchVisualStyles(url) {
 
   return dispatch => fetch(url)
     .then(res => {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! STYLE1111111111')
-      console.log(res)
       return res.json()
     })
     .then(payload => {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! STYLE12222222')
-      console.log(payload)
       const styleMap = {}
       payload.map(vs => {
         styleMap[vs.title] = vs.style
       })
-
       return dispatch(addStyles(styleMap))
     })
     .catch(error => { error });

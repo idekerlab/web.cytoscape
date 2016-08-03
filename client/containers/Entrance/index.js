@@ -37,12 +37,6 @@ const muiTheme = getMuiTheme({
 
 class Entrance extends Component {
 
-
-  prepareParams = () => {
-
-  }
-
-
   componentWillMount() {
     // Extract query params
     const queryParams = this.props.location.query
@@ -54,22 +48,16 @@ class Entrance extends Component {
     if (networkId !== undefined) {
       // Prepare params
       if(styleName !== undefined) {
-        console.log('setting STYLE2')
-        console.log(styleName)
         this.props.currentVsActions.setCurrentVs(styleName)
       }
 
       if(backgroundColor !== undefined) {
-        console.log('setting BG2')
-        console.log(backgroundColor)
         this.props.backgroundColorActions.setBackgroundColor(backgroundColor)
       }
 
       if(stylesource === undefined) {
         stylesource = PRESET_STYLES_LOCATION
       }
-      console.log('setting style source')
-      console.log(stylesource)
 
       // First, load style
       this.props.vsActions.fetchVisualStyles(stylesource)
