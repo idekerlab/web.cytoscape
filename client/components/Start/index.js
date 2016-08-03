@@ -13,6 +13,7 @@ export default class Start extends Component {
       <div>
         <div className={style.top}>
           <SourceSelector
+            datasourceActions={this.props.datasourceActions}
             vsActions={this.props.vsActions}
           />
         </div>

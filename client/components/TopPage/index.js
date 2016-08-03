@@ -35,8 +35,11 @@ export default class TopPage extends Component {
   }
 
   render() {
+    const {currentNetwork, networkSourceActions,
+      datasourceActions} = this.props
 
-    const {currentNetwork, networkSourceActions} = this.props
+    console.log('+++++++++++++++++ DS1')
+    console.log(this.props)
 
     return (
       <div>
@@ -54,6 +57,7 @@ export default class TopPage extends Component {
           <Title
             currentNetwork={currentNetwork}
             networkSourceActions={networkSourceActions}
+            datasourceActions={datasourceActions}
           />
         </div>
 

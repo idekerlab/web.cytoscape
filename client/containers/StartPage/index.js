@@ -6,6 +6,7 @@ import * as vsActions from '../../reducers/visualstyles'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Start from '../../components/Start'
+import * as datasourceActions from '../../actions/datasource'
 
 import style from './style.css'
 import * as Colors from 'material-ui/styles/colors'
@@ -49,6 +50,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     vsActions: bindActionCreators(vsActions, dispatch),
+    datasourceActions: bindActionCreators(datasourceActions, dispatch),
   }
 }
 

@@ -17,7 +17,7 @@ export default class NetworkViewer extends Component {
       commands, commandActions,
       events, eventActions, networkId, uiState, uiStateActions,
       styles, currentVs, currentVsActions, backgroundColorActions,
-      backgroundColor, vsActions
+      backgroundColor, vsActions, datasource
     } = this.props
 
     return (
@@ -33,6 +33,7 @@ export default class NetworkViewer extends Component {
           currentVs={currentVs}
           backgroundColorActions={backgroundColorActions}
           backgroundColor={backgroundColor}
+          datasource={datasource}
         />
 
         <NetworkPanel

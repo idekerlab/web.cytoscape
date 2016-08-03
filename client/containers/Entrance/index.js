@@ -44,10 +44,12 @@ class Entrance extends Component {
 
 
   componentWillMount() {
+    // Extract query params
     const queryParams = this.props.location.query
     const networkId = queryParams.url
     const styleName = queryParams.style
     const backgroundColor = queryParams.bgcolor
+    let stylesource= queryParams.stylesource
 
     if (networkId !== undefined) {
       // Prepare params
@@ -63,8 +65,14 @@ class Entrance extends Component {
         this.props.backgroundColorActions.setBackgroundColor(backgroundColor)
       }
 
+      if(stylesource === undefined) {
+        stylesource = PRESET_STYLES_LOCATION
+      }
+      console.log('setting style source')
+      console.log(stylesource)
+
       // First, load style
-      this.props.vsActions.fetchVisualStyles(PRESET_STYLES_LOCATION)
+      this.props.vsActions.fetchVisualStyles(stylesource)
 
       // Redirect to network page
       const encodedId = encodeURIComponent(networkId)
@@ -76,7 +84,7 @@ class Entrance extends Component {
   }
 
   render() {
-    const {currentNetwork, networkSourceActions} = this.props
+    const {currentNetwork, networkSourceActions, datasourceActions, datasource} = this.props
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -84,6 +92,8 @@ class Entrance extends Component {
           className={style.main}
           currentNetwork={currentNetwork}
           networkSourceActions={networkSourceActions}
+          datasourceActions={datasourceActions}
+          datasource={datasource}
         />
       </MuiThemeProvider>
     )
@@ -93,6 +103,7 @@ class Entrance extends Component {
 function mapStateToProps(state) {
   return {
     currentNetwork: state.app_manager.current_network,
+    datasource: state.app_manager.datasource,
   }
 }
 

@@ -41,7 +41,10 @@ export default class ClosableAppBar extends Component {
   render() {
     const {uiState, uiStateActions, networks, networkId,
       styles, currentVsActions, backgroundColorActions,
-      backgroundColor, currentVs} = this.props
+      backgroundColor, currentVs, datasource} = this.props
+
+    console.log('*************** DS')
+    console.log(this.props)
 
     if (!uiState.get('showAppBar')) {
       return (
@@ -98,6 +101,7 @@ export default class ClosableAppBar extends Component {
           open={this.state.shareDialogOpen}
           currentVs={currentVs}
           backgroundColor={backgroundColor}
+          datasource={datasource}
         />
 
         <Drawer

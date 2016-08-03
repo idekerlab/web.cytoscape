@@ -185,6 +185,7 @@ export default class SourceSelector extends Component {
           handleChange={this.handleChange}
           helperText={this.state.helperText}
           vsActions={this.props.vsActions}
+          datasourceActions={this.props.datasourceActions}
         />
       </div>
     )

@@ -60,6 +60,7 @@ function mapStateToProps(state) {
     styles: state.visual_styles,
     currentVs: state.app_manager.current_vs,
     backgroundColor: state.app_manager.background_color,
+    datasource: state.app_manager.datasource,
   }
 }
 

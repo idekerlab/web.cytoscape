@@ -36,6 +36,10 @@ export default class UrlSource extends Component {
     } else {
       this.props.vsActions.fetchVisualStyles(styleUrl)
     }
+
+    this.props.datasourceActions.setNetworkSource(url)
+    this.props.datasourceActions.setStyleSource(styleUrl)
+
     browserHistory.push('/networks/' + networkId)
   }
 
