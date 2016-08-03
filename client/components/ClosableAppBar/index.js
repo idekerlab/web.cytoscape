@@ -40,7 +40,8 @@ export default class ClosableAppBar extends Component {
 
   render() {
     const {uiState, uiStateActions, networks, networkId,
-      styles, currentVsActions} = this.props
+      styles, currentVsActions, backgroundColorActions,
+      backgroundColor, currentVs} = this.props
 
     if (!uiState.get('showAppBar')) {
       return (
@@ -67,6 +68,9 @@ export default class ClosableAppBar extends Component {
               uiStateActions={uiStateActions}
               styles={styles}
               currentVsActions={currentVsActions}
+              currentVs={currentVs}
+              backgroundColor={backgroundColor}
+              backgroundColorActions={backgroundColorActions}
             />
           </Drawer>
         </div>
@@ -92,6 +96,8 @@ export default class ClosableAppBar extends Component {
           networkId={networkId}
           onTouchTap={this.handleShareDialogOpen}
           open={this.state.shareDialogOpen}
+          currentVs={currentVs}
+          backgroundColor={backgroundColor}
         />
 
         <Drawer
@@ -108,6 +114,9 @@ export default class ClosableAppBar extends Component {
             uiStateActions={uiStateActions}
             styles={styles}
             currentVsActions={currentVsActions}
+            currentVs={currentVs}
+            backgroundColor={backgroundColor}
+            backgroundColorActions={backgroundColorActions}
           />
         </Drawer>
       </div>

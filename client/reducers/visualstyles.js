@@ -1,6 +1,7 @@
 import {Map} from 'immutable'
 
 const LOAD_VS = 'LOAD_VS'
+const ADD_ALL_VS = 'ADD_ALL_VS'
 const ADD_VS = 'ADD_VS'
 const REMOVE_VS = 'REMOVE_VS'
 const REMOVE_ALL_VS = 'REMOVE_ALL_VS'
@@ -13,8 +14,10 @@ const defaultState = Map({
 export default function visualStyleState(state = defaultState, action) {
 
   switch (action.type) {
-    case ADD_VS:
+    case ADD_ALL_VS:
       return Map(action.styles)
+    case ADD_VS:
+      return state.set(action.vsName, action.style)
     case REMOVE_VS:
       return state.delete(action.vsName)
     case REMOVE_ALL_VS:
@@ -25,13 +28,9 @@ export default function visualStyleState(state = defaultState, action) {
 }
 
 export function fetchVisualStyles(url) {
-  console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! STYLE00000000000')
-
-  console.log(url)
 
   return dispatch => fetch(url)
     .then(res => {
-
       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! STYLE1111111111')
       console.log(res)
       return res.json()
@@ -52,8 +51,16 @@ export function fetchVisualStyles(url) {
 
 export function addStyles(styles) {
   return {
-    type: ADD_VS,
+    type: ADD_ALL_VS,
     styles: styles,
+  }
+}
+
+export function addStyle(vsName, style) {
+  return {
+    type: ADD_VS,
+    vsName: vsName,
+    style: style
   }
 }
 

@@ -8,6 +8,7 @@ import * as eventActions from '../../actions/cyjs'
 import * as uiStateActions from '../../actions/ui-state'
 import * as vsActions from '../../reducers/visualstyles'
 import * as currentVsActions from '../../reducers/currentvs'
+import * as backgroundColorActions from '../../actions/background-color'
 
 import NetworkViewer from '../../components/NetworkViewer'
 import {networkDownloadActions, networkActions} from 'cy-network-store'
@@ -31,7 +32,6 @@ const muiTheme = getMuiTheme({
  * Base component for the network viewer page.
  */
 class NetworkView extends Component {
-
   render() {
     console.log("*** Viewer Container ***")
     console.log(this.props)
@@ -59,11 +59,11 @@ function mapStateToProps(state) {
     uiState: state.app_manager.ui_state,
     styles: state.visual_styles,
     currentVs: state.app_manager.current_vs,
+    backgroundColor: state.app_manager.background_color,
   }
 }
 
 function mapDispatchToProps(dispatch) {
-
   return {
     downloadActions: bindActionCreators(networkDownloadActions, dispatch),
     networkActions: bindActionCreators(networkActions, dispatch),
@@ -73,6 +73,7 @@ function mapDispatchToProps(dispatch) {
     uiStateActions: bindActionCreators(uiStateActions, dispatch),
     vsActions: bindActionCreators(vsActions, dispatch),
     currentVsActions: bindActionCreators(currentVsActions, dispatch),
+    backgroundColorActions: bindActionCreators(backgroundColorActions, dispatch),
   }
 }
 

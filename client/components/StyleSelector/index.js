@@ -4,26 +4,23 @@ import MenuItem from 'material-ui/MenuItem';
 
 
 const style = {
-  color: '#777777',
-  fontWeight: 400
+  color: '#555555',
+  fontWeight: 600
 }
 
 class StyleSelector extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'default'
-    }
-  }
-
   handleChange = (event, index, value) => {
-    this.setState({value})
     this.props.currentVsActions.setCurrentVs(value)
   }
 
   render() {
+    let currentVsName = this.props.currentVs.get('vsName')
+    if(this.props.styles.get(currentVsName) === undefined) {
+      currentVsName = 'default'
+    }
     const styleNames = this.props.styles.keys()
+
     const items = []
 
     let count = 1
@@ -33,17 +30,16 @@ class StyleSelector extends Component {
     }
 
     return (
-      <div>
-        <SelectField
-          labelStyle={style}
-          value={this.state.value}
-          onChange={this.handleChange}
-          floatingLabelText="Current Visual Style"
-          floatingLabelStyle={{color: '#777777', fontWeight:300}}
-        >
-          {items}
-        </SelectField>
-      </div>
+      <SelectField
+        style={{paddingLeft: '1.2em'}}
+        labelStyle={style}
+        value={currentVsName}
+        onChange={this.handleChange}
+        floatingLabelText="Current Visual Style"
+        floatingLabelStyle={{color: '#666666', fontWeight: 300}}
+      >
+        {items}
+      </SelectField>
     )
   }
 }

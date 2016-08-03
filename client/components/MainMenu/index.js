@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { browserHistory } from 'react-router'
+import {browserHistory} from 'react-router'
 
 import classnames from 'classnames'
 
@@ -8,11 +8,13 @@ import Divider from 'material-ui/Divider';
 import Settings from 'material-ui/svg-icons/action/settings'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import StyleIcon from 'material-ui/svg-icons/image/color-lens'
+import StyleSelectorIcon from 'material-ui/svg-icons/image/style'
 import Avatar from 'material-ui/Avatar'
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 import Toggle from 'material-ui/Toggle';
 
 import StyleSelector from '../StyleSelector'
+import ColorPicker from '../ColorPicker'
 
 import style from './style.css'
 import logo from '../../assets/images/cytoscape-logo-orange.svg'
@@ -38,17 +40,17 @@ export default class MainMenu extends Component {
   extractNdexData(cxData) {
     const provenanceHistory = cxData.provenanceHistory
 
-    if(provenanceHistory === undefined || provenanceHistory === null) {
+    if (provenanceHistory === undefined || provenanceHistory === null) {
       return []
     }
 
     const entity = provenanceHistory[0].entity
-    if(entity === undefined || entity === null) {
+    if (entity === undefined || entity === null) {
       return []
     }
 
     const properties = entity.properties
-    if(properties === undefined || properties === null) {
+    if (properties === undefined || properties === null) {
       return []
     }
 
@@ -60,7 +62,7 @@ export default class MainMenu extends Component {
     let url = this.props.networkId
     let network = undefined
 
-    if(url === undefined || url === null || url === '') {
+    if (url === undefined || url === null || url === '') {
       // URL is not available
       url = ''
     } else {
@@ -72,7 +74,7 @@ export default class MainMenu extends Component {
     if (network !== undefined) {
       // Case 1: NDEx network
       const ndexProps = network.get('cxData')
-      if(ndexProps !== undefined) {
+      if (ndexProps !== undefined) {
         ndexMetadata = this.extractNdexData(ndexProps)
       }
 
@@ -85,7 +87,8 @@ export default class MainMenu extends Component {
     const showAppBar = uiState.get('showAppBar')
     const showCommands = uiState.get('showCommands')
     const styles = this.props.styles
-    const {currentVsActions} = this.props
+    const {currentVsActions, backgroundColorActions,
+      backgroundColor, currentVs} = this.props
 
     return (
       <div>
@@ -123,22 +126,19 @@ export default class MainMenu extends Component {
             primaryTogglesNestedList={true}
             nestedItems={[
 
-              <ListItem
+              <ColorPicker
                 key={1}
-                leftAvatar={
-                  <Avatar
-                    backgroundColor={'#EEEEEE'}
-                  />
-                }
-                primaryText="Background Color"
+                backgroundColor={backgroundColor}
+                backgroundColorActions={backgroundColorActions}
+              />,
+              <ListItem
+                key={2}
               >
-              </ListItem>,
-
-              <ListItem key={2}>
                 <StyleSelector
                   styles={styles}
+                  currentVs={currentVs}
                   currentVsActions={currentVsActions}
-                  className={style.subtitle}/>
+                />
               </ListItem>
             ]}
           />

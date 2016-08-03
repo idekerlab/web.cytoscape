@@ -13,12 +13,14 @@ export default class NetworkPanel extends Component {
   render() {
     const {
       commands, commandActions, events,
-      eventActions, networkId, styles, currentVs } = this.props
+      eventActions, networkId, styles, currentVs,
+      backgroundColor, vsActions, currentVsActions} = this.props
 
     const network = this.props.networks.get(networkId)
     if (network !== undefined) {
       return (
         <CytoscapeRenderer
+          rendId="mainView"
           commands={commands}
           commandActions={commandActions}
           events={events}
@@ -26,6 +28,9 @@ export default class NetworkPanel extends Component {
           networkData={network}
           styles={styles}
           currentVs={currentVs}
+          currentVsActions={currentVsActions}
+          backgroundColor={backgroundColor}
+          vsActions={vsActions}
         />
       )
     } else {

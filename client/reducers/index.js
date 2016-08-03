@@ -7,6 +7,8 @@ import visual_styles from './visualstyles'
 import cy_commands from './cycommands'
 import cy_events from './cy-events'
 import ui_state from './ui-state'
+import background_color from './background-color'
+
 
 import {store as netStore} from 'cy-network-store'
 
@@ -19,7 +21,8 @@ const app_manager = combineReducers({
   current_network: currentNetwork,
   commands: cy_commands,
   cy_events: cy_events,
-  ui_state: ui_state
+  ui_state: ui_state,
+  background_color: background_color
 })
 
 

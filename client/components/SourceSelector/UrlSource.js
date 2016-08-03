@@ -8,6 +8,8 @@ import style from './style.css'
 
 const NDEX_URL = 'http://ci-dev-serv.ucsd.edu:3001/ndex2cyjs/'
 
+const PRESET_STYLES_LOCATION = '../../assets/preset-styles.json'
+
 export default class UrlSource extends Component {
 
   handleClear = event => {
@@ -22,13 +24,18 @@ export default class UrlSource extends Component {
     const networkId = encodeURIComponent(url)
 
     const vsNode = this.refs.vsUrl
-    const styleUrl = vsNode.input.value.trim()
+    let styleUrl = vsNode.input.value.trim()
 
     console.log('---------- Loading style -------------')
     console.log(this.props)
     console.log(styleUrl)
-    const test1 = 'https://raw.githubusercontent.com/cytoscape/cyjs-sample/03d586d207d51397dcf4f3d8877a01f4a01cc1d8/app/data/style.json'
-    this.props.vsActions.fetchVisualStyles(test1)
+
+    if(styleUrl === undefined || styleUrl === null || styleUrl === '') {
+      console.log('---------- No need to load style -------------')
+      styleUrl = PRESET_STYLES_LOCATION
+    } else {
+      this.props.vsActions.fetchVisualStyles(styleUrl)
+    }
     browserHistory.push('/networks/' + networkId)
   }
 

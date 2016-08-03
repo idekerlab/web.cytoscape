@@ -26,35 +26,46 @@ export default class CytoscapeRenderer extends React.Component {
     super(props)
     this.state = {
       rendered: false,
-      vs: 'default'
+      vs: 'default',
     }
+  }
+
+  componentWillMount() {
+    // Check key
+    if(this.props.rendId === undefined || this.props.rendId === null) {
+      console.error('Key is required!')
+    }
+
   }
 
   updateCyjs(networkData) {
     console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Cytoscape.js is rendering new network...')
+    console.log(this.props)
+
     this.state.rendered = true
 
-    console.log(networkData);
-
     let network = networkData.toJS()
-    console.log(network)
 
+    // Case 1: network has Style section
     let visualStyle = network.style
 
     if (visualStyle === undefined || visualStyle === null || visualStyle === {}) {
-      visualStyle = DEF_VISUAL_STYLE
+      // Style section is not available
+      const styleName = this.props.currentVs.get('vsName')
+      visualStyle = this.props.styles.get(styleName)
+      if(visualStyle === undefined) {
+        visualStyle = this.props.styles.get('default')
+      }
+    } else {
+      // This is a new visual style.  Add it to the manager.
+      this.props.vsActions.addStyle('Custom', visualStyle)
+      this.props.currentVsActions.setCurrentVs('Custom')
     }
 
     const cy = this.state.cyjs
     cy.style(visualStyle)
     cy.add(network.elements.nodes)
     cy.add(network.elements.edges)
-
-    if(visualStyle === DEF_VISUAL_STYLE) {
-      cy.layout({
-        name: DEF_NO_LAYOUT,
-      })
-    }
     cy.fit()
   }
 
@@ -63,7 +74,7 @@ export default class CytoscapeRenderer extends React.Component {
     const cy = cytoscape(
       Object.assign(
         {
-          container: document.getElementById(CYTOSCAPE_TAG),
+          container: document.getElementById(this.props.rendId),
           elements: [],
           layout: {
             name: DEF_LAYOUT
@@ -75,11 +86,17 @@ export default class CytoscapeRenderer extends React.Component {
 
 
   shouldComponentUpdate(nextProps, nextState) {
+    // React is responsible only for the root Cytoscape tag.
+    // and in this section, the only thing we need to check is background and network.
     console.log("$$$$$$$$$ Checking props")
     if (nextProps.networkData === this.props.networkData) {
-      return false
+      // Is this background update?
+      if(nextProps.backgroundColor === this.props.backgroundColor) {
+        return false
+      } else {
+        return true
+      }
     }
-    console.log("********** Need UPDATE **********")
     return true
   }
 
@@ -87,7 +104,6 @@ export default class CytoscapeRenderer extends React.Component {
     console.log('CYJS ____________ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     const command = nextProps.commands.command
     if(command !== '') {
-
       const cy = this.state.cyjs
       if(command === 'fit') {
         cy.fit()
@@ -101,7 +117,6 @@ export default class CytoscapeRenderer extends React.Component {
       this.props.commandActions.reset()
       return
     }
-
 
     // Style
     const curVs = this.state.vs
@@ -134,10 +149,18 @@ export default class CytoscapeRenderer extends React.Component {
   }
 
   render() {
+    const bgc = this.props.backgroundColor.get('backgroundColor')
+    console.log('************* COLOR')
+    console.log(bgc)
+
     // Just add a div tag for Cytoscape.js.
     // Cytoscape.js can render result only when this section is available in DOM.
     return (
-      <div id={CYTOSCAPE_TAG} className={style.cy}/>
+      <div
+        id={this.props.rendId}
+        className={style.cy}
+        style={{backgroundColor: bgc}}
+      />
     )
   }
 

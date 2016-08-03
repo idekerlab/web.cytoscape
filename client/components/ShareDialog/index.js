@@ -19,10 +19,10 @@ const contentStyle = {
 
 export default class ShareDialog extends Component {
 
-  createUrl = networkId => {
+  createUrl = (networkId, styleName, bg) => {
     const fullUrl = window.location.href
     const base = fullUrl.split('/networks')[0]
-    return base + '/?url=' + networkId
+    return base + '/?url=' + networkId + '&style=' + styleName + '&bgcolor=' + bg
   }
 
   shouldComponentUpdate(nextProp, nextState) {
@@ -43,7 +43,10 @@ export default class ShareDialog extends Component {
       />
     ];
 
-    const url = this.createUrl(this.props.networkId)
+    // Prepare params
+    const styleName = this.props.currentVs.get('vsName')
+    const bg = this.props.backgroundColor.get('backgroundColor')
+    const url = this.createUrl(this.props.networkId, styleName, bg)
 
     return (
       <Dialog
