@@ -1,4 +1,5 @@
 import {Map} from 'immutable'
+import 'whatwg-fetch'
 
 const LOAD_VS = 'LOAD_VS'
 const ADD_ALL_VS = 'ADD_ALL_VS'

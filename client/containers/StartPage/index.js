@@ -9,7 +9,7 @@ import Start from '../../components/Start'
 import * as datasourceActions from '../../actions/datasource'
 
 import * as Colors from 'material-ui/styles/colors'
-import {networkActions} from 'cy-network-store'
+import * as networkActions from '../../reducers/networks'
 
 const muiTheme = getMuiTheme({
   palette: {

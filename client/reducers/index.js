@@ -3,18 +3,17 @@ import {combineReducers} from 'redux'
 import currentNetwork from './currentnetwork'
 import current_vs from './currentvs'
 import visual_styles from './visualstyles'
-// import commands from './commands'
 import cy_commands from './cycommands'
 import cy_events from './cy-events'
 import ui_state from './ui-state'
 import background_color from './background-color'
 import datasource from './datasource'
 
-
-import {store as netStore} from 'cy-network-store'
+import networks from './networks'
+import networkDownload from './networkDownload'
 
 // Cytoscape.js network data store
-const cy_network = combineReducers(netStore)
+const cy_network = combineReducers({networks, networkDownload})
 
 // Application states
 const app_manager = combineReducers({

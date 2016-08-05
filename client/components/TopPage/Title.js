@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 import {browserHistory} from 'react-router'
 import FlatButton from 'material-ui/FlatButton';
 
@@ -16,40 +15,37 @@ export default class Title extends Component {
   }
 
   render() {
-    const {currentNetwork, networkSourceActions} = this.props
-
     return (
       <div className={style.title}>
 
-        <div className={style.row1}>
-          <div className={style.logoCol}>
-            <img
-              className={style.logoIcon}
-              src={logo}
-              alt="Cytoscape Logo"
+        <div className={style.logoCol}>
+          <img
+            className={style.logoIcon}
+            src={logo}
+            alt="Cytoscape Logo"
+          />
+        </div>
+
+        <div className={style.col2}>
+          <section className={style.titleText}>
+            cy.next &beta;
+          </section>
+
+          <section className={style.description}>
+            Next generation platform for network authoring, analysis,
+            visualization, and sharing
+          </section>
+
+          <section className={style.start}>
+
+            <FlatButton
+              className={style.startButton}
+              backgroundColor={Colors.teal600}
+              hoverColor={Colors.teal200}
+              label="Start"
+              onClick={this.handleStart}
             />
-          </div>
-          i
-
-          <div className={style.col2}>
-            <div className={style.titleText}>
-              cy.next &beta;
-            </div>
-            <div className={style.description}>
-              Next generation platform for network authoring, analysis,
-              visualization, and sharing
-            </div>
-
-            <div className={style.buttonLocation}>
-              <FlatButton
-                className={style.start}
-                backgroundColor={Colors.teal500}
-                hoverColor={Colors.teal200}
-                label="Start"
-                onClick={this.handleStart}
-              />
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     )

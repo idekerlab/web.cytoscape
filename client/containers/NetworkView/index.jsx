@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as networkSourceActions from '../../reducers/currentnetwork'
-// import * as commandActions from '../../reducers/commands'
 import * as commandActions from '../../actions/commands'
 import * as eventActions from '../../actions/cyjs'
 import * as uiStateActions from '../../actions/ui-state'
@@ -11,7 +10,9 @@ import * as currentVsActions from '../../reducers/currentvs'
 import * as backgroundColorActions from '../../actions/background-color'
 
 import NetworkViewer from '../../components/NetworkViewer'
-import {networkDownloadActions, networkActions} from 'cy-network-store'
+
+import * as networkDownloadActions from '../../reducers/networkDownload'
+import * as networkActions from '../../reducers/networks'
 
 import style from './style.css'
 import {teal700} from 'material-ui/styles/colors';

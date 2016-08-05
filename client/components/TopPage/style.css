@@ -41,98 +41,73 @@
     justify-content: center;
 }
 
-.gridCell {
-    /*flex: 0 0 auto;*/
-    width: auto;
-}
-
-.gridCell2 {
-    /*flex: 0 0 auto;*/
-    width: 100%;
-    border: none;
-}
-
-.gridCellFull {
-    flex: 0 0 100%;
-}
-
-.gridCellHalf {
-    flex: 0 0 50%;
-}
-
 .gridCenter {
     align-items: center;
     justify-content: center;
 }
 
+
+
 .title {
+    display: flex;
     max-width: 800px;
     min-width: 750px;
-}
-
-.row1 {
-    width: 100%;
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .logoCol {
-    width: 100%;
-    flex: 1;
-    height: 100%;
-}
-
-.col2 {
-    height: 100%;
-    display: inline-flex;
-    flex: 3;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 300px;
 }
 
 .logoIcon {
-    width: 23em;
+    width: 100%;
+}
+
+.col2 {
+    flex: 1;
+    flex-direction: column;
+    padding-left: 2em;
 }
 
 .titleText {
     height: 0.7em;
     font-weight: 100;
-    font-size: 7em;
+    font-size: 9em;
     color: #FFFFFF;
 }
 
 .description {
-    width: 90%;
     font-weight: 400;
     font-size: 1.3em;
     line-height: 1.4em;
-    margin-top: 0.5em;
-    color: #999999;
+    color: #888888;
 }
 
-.row2 {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 3em;
-}
+/*.row2 {*/
+    /*width: 100%;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*margin-top: 3em;*/
+/*}*/
 
 .buttonLocation {
     width: 80%;
-    margin-top: 2em;
     padding-top: 2em;
-    display: inline-flex;
-    align-items: flex-end;
-    justify-content: center;
 }
 
 .start {
-    width: 60%;
+    display: inline-flex;
+    flex-direction: row;
+    margin-top: 3em;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.startButton {
+    width: 55%;
 }
 
 .iconStyle {
