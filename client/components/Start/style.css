@@ -1,161 +1,18 @@
-.top {
+.container {
     margin: 0;
     padding: 0;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #FEFEFE;
-
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-}
-
-.grid {
-    flex-wrap: wrap;
-    flex-flow: row wrap;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.lineBreak {
-    width: 100%;
-}
-
-.box1 {
-    width: 100%;
-    height: 40%;
-    /*background-color: #0b97c4;*/
-}
-
-.boxGrid {
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-}
-
-.gridCell {
-    /*flex: 0 0 auto;*/
-    width: auto;
-}
-
-.gridCell2 {
-    /*flex: 0 0 auto;*/
-    width: 100%;
-    border: none;
-}
-
-.gridCellFull {
-    flex: 0 0 100%;
-}
-
-.gridCellHalf {
-    flex: 0 0 50%;
-}
-
-.gridCenter {
-    align-items: center;
-    justify-content: center;
-}
-
-.title {
-    max-width: 800px;
-    min-width: 750px;
-}
-
-.row1 {
-    width: 100%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.logoCol {
-    width: 100%;
-    flex: 1;
-    height: 100%;
-}
-
-.col2 {
-    height: 100%;
-    display: inline-flex;
-    flex: 3;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.logoIcon {
-    width: 23em;
-}
-
-.titleText {
-    height: 0.7em;
-    font-weight: 100;
-    font-size: 7em;
-    color: #FFFFFF;
-}
-
-.description {
-    width: 90%;
-    font-weight: 400;
-    font-size: 1.3em;
-    line-height: 1.4em;
-    margin-top: 0.5em;
-    color: #999999;
-}
-
-.row2 {
-    width: 100%;
+    background-color: #F8F8F8;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 3em;
 }
 
-.buttonLocation {
-    width: 80%;
-    margin-top: 2em;
-    padding-top: 2em;
-    display: inline-flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.start {
-    width: 60%;
-}
-
-.iconStyle {
-    margin-left: 0.5em;
-    margin-top: 0.5em;
-    margin-bottom: 0.2em;
-}
-
-.topFooter {
-    margin: 0;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+.centered {
+    background-color: inherit;
     width: 100%;
-    background-color: #fafafa;
-    text-align: center;
-}
-
-.topFooter a {
-    text-decoration: none;
-    color: #AAAAAA;
-}
-
-.topFooter a:visited {
-    color: inherit;
 }

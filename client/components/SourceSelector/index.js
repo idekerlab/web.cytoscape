@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Paper from 'material-ui/Paper';
 import UrlSource from './UrlSource'
 
+import * as Colors from 'material-ui/styles/colors'
 import style from './style.css'
 
 const NDEX_ID_REGEX = /[0-9a-f\-]{36,36}/
@@ -19,12 +20,12 @@ const VALUES = {
 
 const baseStyle = {
   backgroundColor: 'white',
-  color: '#999999'
+  color: '#aaaaaa'
 }
 
 const selectedStyle = {
-  backgroundColor: '#C7E6E2',
-  color: '#333333'
+  backgroundColor: Colors.cyan400,
+  color: 'white'
 }
 
 export default class SourceSelector extends Component {
@@ -41,11 +42,9 @@ export default class SourceSelector extends Component {
       cardNdex: selectedStyle,
       cardUrl: baseStyle,
       cardZip: baseStyle,
+      cardStyle: style.source,
     };
   }
-
-  onMouseOver = () => this.setState({shadow: 2});
-  onMouseOut = () => this.setState({shadow: 1});
 
   resetSelection = () => {
     this.setState({
@@ -123,23 +122,15 @@ export default class SourceSelector extends Component {
     return (
       <div className={style.selectorMain}>
 
-        <div className={style.container}>
-          <div className={style.title}>
-            Select Data Source
-          </div>
-        </div>
-
         <div className={style.selectorBox}>
           <Paper
-            className={style.source}
+            className={this.state.cardStyle}
             style={this.state.cardNdex}
-            onMouseOver={this.onMouseOver}
-            onMouseOut={this.onMouseOut}
             onClick={this.onNdexCardClick}
-            zDepth={this.state.shadow}>
+          >
 
             <h2>NDEx ID</h2>
-            <section>
+            <section className={style.description}>
               Unique ID of NDEx network
             </section>
           </Paper>
@@ -147,27 +138,23 @@ export default class SourceSelector extends Component {
           <Paper
             className={style.source}
             style={this.state.cardUrl}
-            onMouseOver={this.onMouseOver}
-            onMouseOut={this.onMouseOut}
             onClick={this.onUrlCardClick}
-            zDepth={this.state.shadow}
           >
-            <h2>Cytosvape.js JSON</h2>
-            <section>
-              URL of JSON file in Cytoscape.js format
+            <h2>Cytosape.js JSON</h2>
+            <section className={style.description}>
+              URL of a JSON file in Cytoscape.js format
             </section>
 
           </Paper>
           <Paper
             className={style.source}
             style={this.state.cardZip}
-            onMouseOver={this.onMouseOver}
-            onMouseOut={this.onMouseOut}
             onClick={this.onZipCardClick}
-            zDepth={this.state.shadow}>
+          >
             <h2>Zipped Archive</h2>
-            <section>
-              Zipped file exported from Cytoscape 3
+            <section className={style.description}>
+              URL of a zipped archive exported from Cytoscape 3
+              using Science Direct App
             </section>
           </Paper>
         </div>
@@ -182,6 +169,7 @@ export default class SourceSelector extends Component {
           vsActions={this.props.vsActions}
           datasourceActions={this.props.datasourceActions}
           networkActions={this.props.networkActions}
+          networkDownload={this.props.networkDownload}
         />
       </div>
     )

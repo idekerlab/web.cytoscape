@@ -15,18 +15,15 @@
 
 .loader {
     z-index: 1000;
-    margin-left: -85.5px;
-    margin-top: -85.5px;
 }
 
 .square {
     background: rgb(31,190,202);
-    width: 47px;
-    height: 47px;
+    width: 5em;
+    height: 5em;
     float: left;
-    top: -31px;
-    margin-right: 16px;
-    margin-top: 16px;
+    margin-right: 0.3em;
+    margin-top: 0.3em;
     opacity: 0;
     animation: enter 4.2s infinite;
     -o-animation: enter 4.2s infinite;
@@ -36,7 +33,7 @@
 }
 
 .enter {
-    top: 0px;
+    top: 0;
     opacity: 1;
 }
 
@@ -119,11 +116,10 @@
 }
 
 
-
 @keyframes enter {
     0% {
         opacity: 0;
-        top: -31px;
+        top: -0.3em;
     }
     5% {
         opacity: 1;
@@ -135,14 +131,14 @@
     }
     55.9% {
         opacity: 0;
-        top: 31px;
+        top: 0.3em;
     }
 }
 
 @-o-keyframes enter {
     0% {
         opacity: 0;
-        top: -31px;
+        top: -0.3em;
     }
     5% {
         opacity: 1;
@@ -154,14 +150,14 @@
     }
     55.9% {
         opacity: 0;
-        top: 31px;
+        top: 0.3em;
     }
 }
 
 @-ms-keyframes enter {
     0% {
         opacity: 0;
-        top: -31px;
+        top: -0.3em;
     }
     5% {
         opacity: 1;
@@ -173,14 +169,14 @@
     }
     55.9% {
         opacity: 0;
-        top: 31px;
+        top: 0.3em;
     }
 }
 
 @-webkit-keyframes enter {
     0% {
         opacity: 0;
-        top: -31px;
+        top: -0.3em;
     }
     5% {
         opacity: 1;
@@ -192,14 +188,14 @@
     }
     55.9% {
         opacity: 0;
-        top: 31px;
+        top: 0.3em;
     }
 }
 
 @-moz-keyframes enter {
     0% {
         opacity: 0;
-        top: -31px;
+        top: -0.3em;
     }
     5% {
         opacity: 1;
@@ -211,6 +207,6 @@
     }
     55.9% {
         opacity: 0;
-        top: 31px;
+        top: 0.3em;
     }
 }

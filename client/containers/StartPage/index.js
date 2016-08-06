@@ -44,6 +44,7 @@ class StartPage extends Component {
 function mapStateToProps(state) {
   return {
     visualStyles: state.visual_styles,
+    networkDownload: state.cy_network.networkDownload,
   }
 }
 

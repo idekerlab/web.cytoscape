@@ -93,12 +93,12 @@ export default class UrlSource extends Component {
         })
         vsActions.addStyles(styleMap)
       }).then(() => {
-        const fileNames = Object.keys(archive.files)
-        for(let name of fileNames) {
-          if(name !== 'style.json') {
-            return archive.file(name).async('string')
-          }
+      const fileNames = Object.keys(archive.files)
+      for (let name of fileNames) {
+        if (name !== 'style.json') {
+          return archive.file(name).async('string')
         }
+      }
     }).then(networkStr => {
       const network = JSON.parse(networkStr)
       console.log(network);
@@ -121,15 +121,16 @@ export default class UrlSource extends Component {
   }
 
   render() {
+
     return (
       <div>
-        <div className={style.container}>
-          <div className={style.wrapper1}>
+        <div className={style.selectorBox}>
+          <div className={style.textRow}>
             <TextField
               className={style.sourceText}
               ref='sourceUrl'
-              inputStyle={{color: '#666666'}}
-              hintStyle={{color: '#999999'}}
+              inputStyle={{color: '#555555', fontWeight: 700}}
+              hintStyle={{color: '#666666', fontWeight: 700}}
               hintText={this.props.helperText}
               onChange={this.props.handleChange}
             />
@@ -138,32 +139,27 @@ export default class UrlSource extends Component {
               ref='vsUrl'
               inputStyle={{color: '#666666'}}
               hintText="Optional: Visual Style URL"
-              hintStyle={{color: '#999999'}}
+              hintStyle={{color: '#888888'}}
             />
           </div>
         </div>
-        <div className={style.container}>
-          <div className={style.wrapper1}>
-            <div className={style.actionBox}>
-              <FlatButton
-                className={style.bottom2}
-                label="Clear"
-                style={{marginLeft: '1em', flex: 1}}
-                backgroundColor={Colors.teal800}
-                onClick={this.handleClear}
-              />
-              <FlatButton
-                className={style.bottom2}
-                label="Visualize"
-                disabled={!this.props.isReady}
-                style={{marginLeft: '1em', flex: 1}}
-                labelStyle={{fontWeight: 600}}
-                backgroundColor={Colors.orange700}
-                hoverColor={Colors.orange400}
-                onClick={this.handleVisualize}
-              />
-            </div>
-          </div>
+        <div className={style.selectorBox}>
+          <FlatButton
+            label="Clear"
+            style={{marginLeft: '1em', width: '13em'}}
+            backgroundColor={Colors.teal600}
+            hoverColor={Colors.teal400}
+            onClick={this.handleClear}
+          />
+          <FlatButton
+            label="Visualize"
+            disabled={!this.props.isReady}
+            style={{marginLeft: '1em', width: '13em'}}
+            labelStyle={{fontWeight: 600}}
+            backgroundColor={Colors.orange600}
+            hoverColor={Colors.orange400}
+            onClick={this.handleVisualize}
+          />
         </div>
       </div>
     )

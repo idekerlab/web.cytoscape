@@ -3,6 +3,11 @@ import 'whatwg-fetch'
 
 import {addNetwork} from './networks'
 
+const HEADERS = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+}
+
 const DOWNLOAD_BEGIN = 'DOWNLOAD_BEGIN'
 const DOWNLOAD_SUCCESS = 'DOWNLOAD_SUCCESS'
 const DOWNLOAD_ERROR = 'DOWNLOAD_ERROR'
@@ -16,16 +21,21 @@ export default function downloadState(state = defaultState, action) {
   switch (action.type) {
     case DOWNLOAD_BEGIN:
       return state.merge({
-        downloading: true
+        downloading: true,
+        error: null
       })
     case DOWNLOAD_SUCCESS:
       return state.merge({
         downloading: false
       })
     case DOWNLOAD_ERROR:
+      console.log('! err2')
+      console.log(action.error)
+      const err = action.error
+
       return state.merge({
         downloading: false,
-        error: action.error
+        error: err.toString()
       })
     default:
       return state
@@ -47,19 +57,18 @@ export function downloadSuccess(networkUrl, data) {
 
 /*Set an error field if a download did not complete successfully*/
 export function downloadError(error) {
-  return {type: DOWNLOAD_ERROR, error}
+  return {
+    type: DOWNLOAD_ERROR,
+    error: error
+  }
 }
 
 /*Download the network from the given url*/
 export function download(networkUrl) {
-  var headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
   return dispatch =>
     fetch(networkUrl, {
       method: 'get',
-      headers: headers
+      headers: HEADERS
     }).then(response => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => dispatch(downloadSuccess(networkUrl, data)))
@@ -70,6 +79,8 @@ export function download(networkUrl) {
         throw error
       }
     }).catch(error => {
-      window.alert('Network ' + networkUrl + ' download failed, reason:', error)
+      console.log('*********ERR!!!!!!!!!!!!!!!')
+      console.log(error)
+      dispatch(downloadError(error))
     })
 }

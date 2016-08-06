@@ -40,8 +40,8 @@ export default class Title extends Component {
 
             <FlatButton
               className={style.startButton}
-              backgroundColor={Colors.teal600}
-              hoverColor={Colors.teal200}
+              backgroundColor={Colors.teal500}
+              hoverColor={Colors.teal300}
               label="Start"
               onClick={this.handleStart}
             />

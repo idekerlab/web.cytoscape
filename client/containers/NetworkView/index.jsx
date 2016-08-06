@@ -26,6 +26,10 @@ injectTapEventPlugin();
 const muiTheme = getMuiTheme({
   appBar: {
     color: teal700,
+  },
+  snackbar:{
+    textColor: 'white',
+    actionColor: '#555555'
   }
 })
 
@@ -33,7 +37,6 @@ const muiTheme = getMuiTheme({
  * Base component for the network viewer page.
  */
 class NetworkView extends Component {
-
 
   render() {
     const networkId = this.props.params.uri
