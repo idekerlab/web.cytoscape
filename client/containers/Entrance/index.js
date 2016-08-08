@@ -14,6 +14,8 @@ import TopPage from '../../components/TopPage'
 import style from './style.css'
 import * as Colors from 'material-ui/styles/colors'
 
+import presets from '../../assets/preset-styles.json'
+
 const PRESET_STYLES_LOCATION = '../../assets/preset-styles.json'
 
 const muiTheme = getMuiTheme({
@@ -67,7 +69,11 @@ class Entrance extends Component {
       browserHistory.push('/networks/' + encodedId)
     } else {
       // Load preset styles
-      this.props.vsActions.fetchVisualStyles(PRESET_STYLES_LOCATION)
+      const styleMap = {}
+      presets.map(vs => {
+        styleMap[vs.title] = vs.style
+      })
+      this.props.vsActions.addStyles(styleMap)
     }
   }
 

@@ -40,7 +40,8 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.7.1",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "json-loader": "^0.5.4"
   },
   "dependencies": {
     "cytoscape": "^2.7.7",
