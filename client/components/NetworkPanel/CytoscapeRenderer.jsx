@@ -1,10 +1,10 @@
 import React from "react"
-
 import cytoscape from "cytoscape"
 import style from './style.css'
 
 // Original position will be used when layout is positions are available
 const DEF_LAYOUT = 'preset'
+const LAYOUT = 'cose'
 
 const CY_EVENTS = {
   select: "select",
@@ -34,13 +34,17 @@ export default class CytoscapeRenderer extends React.Component {
     }
 
     this.state.rendered = true
-
     let network = networkData.toJS()
 
     // Case 1: network has Style section
     let visualStyle = network.style
+    let layoutFlag = false
 
     if (visualStyle === undefined || visualStyle === null || visualStyle === {}) {
+
+      if(visualStyle === null) {
+        layoutFlag = true
+      }
       // Style section is not available
       const styleName = this.props.currentVs.get('vsName')
       visualStyle = this.props.styles.get(styleName)
@@ -53,10 +57,14 @@ export default class CytoscapeRenderer extends React.Component {
       this.props.currentVsActions.setCurrentVs('Custom')
     }
 
+
     const cy = this.state.cyjs
     cy.style(visualStyle)
     cy.add(network.elements.nodes)
     cy.add(network.elements.edges)
+    if(layoutFlag) {
+      cy.layout({ name: LAYOUT })
+    }
     cy.fit()
   }
 
@@ -70,7 +78,7 @@ export default class CytoscapeRenderer extends React.Component {
           layout: {
             name: DEF_LAYOUT
           }
-        }));
+        }))
     this.setEventListener(cy)
     this.state.cyjs = cy
   }
@@ -98,7 +106,7 @@ export default class CytoscapeRenderer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('CYJS ____________ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    console.log('CYJS NEW PROPS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     const command = nextProps.commands.command
     if(command !== '') {
       const cy = this.state.cyjs
@@ -147,8 +155,6 @@ export default class CytoscapeRenderer extends React.Component {
 
   render() {
     const bgc = this.props.backgroundColor.get('backgroundColor')
-    console.log('************* COLOR')
-    console.log(bgc)
 
     // Just add a div tag for Cytoscape.js.
     // Cytoscape.js can render result only when this section is available in DOM.
@@ -166,27 +172,15 @@ export default class CytoscapeRenderer extends React.Component {
       switch (ev.originalEvent.type) {
         case CY_EVENTS.select:
           let selected = ev.cyTarget;
-          this.handleSelect(selected, ev)
+          this.props.eventActions.selected(selected.data())
           break
         case CY_EVENTS.unselect:
           let unselected = ev.cyTarget;
-          this.handleUnselect(unselected)
+          this.props.eventActions.unselected(unselected.data())
           break
         default:
           break
       }
     })
-  }
-
-  handleSelect(selected, ev) {
-    console.log('--------- graph object selected')
-    console.log(selected.data())
-    console.log(ev)
-    this.props.eventActions.selected(selected.data())
-  }
-
-  handleUnselect(selected, ev) {
-    console.log('--------- graph object UNselected')
-    this.props.eventActions.unselected(selected.data())
   }
 }

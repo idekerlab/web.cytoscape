@@ -48,10 +48,6 @@ class Entrance extends Component {
     let stylesource= queryParams.stylesource
 
     if (networkId !== undefined) {
-      // Prepare params
-      if(styleName !== undefined) {
-        this.props.currentVsActions.setCurrentVs(styleName)
-      }
 
       if(backgroundColor !== undefined) {
         this.props.backgroundColorActions.setBackgroundColor(backgroundColor)
@@ -59,22 +55,32 @@ class Entrance extends Component {
 
       if(stylesource === undefined) {
         stylesource = PRESET_STYLES_LOCATION
+        this.loadStyles()
+      } else {
+        // First, load style
+        this.props.vsActions.fetchVisualStyles(stylesource)
       }
 
-      // First, load style
-      this.props.vsActions.fetchVisualStyles(stylesource)
+      // Prepare params
+      if(styleName !== undefined) {
+        this.props.currentVsActions.setCurrentVs(styleName)
+      }
 
       // Redirect to network page
       const encodedId = encodeURIComponent(networkId)
       browserHistory.push('/networks/' + encodedId)
     } else {
       // Load preset styles
-      const styleMap = {}
-      presets.map(vs => {
-        styleMap[vs.title] = vs.style
-      })
-      this.props.vsActions.addStyles(styleMap)
+      this.loadStyles()
     }
+  }
+
+  loadStyles() {
+    const styleMap = {}
+    presets.map(vs => {
+      styleMap[vs.title] = vs.style
+    })
+    this.props.vsActions.addStyles(styleMap)
   }
 
   render() {
