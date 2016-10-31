@@ -44,11 +44,10 @@
     "json-loader": "^0.5.4"
   },
   "dependencies": {
-    "cytoscape": "^2.7.7",
+    "cytoscape": "^2.7.10",
     "immutable": "^3.8.1",
     "import": "0.0.6",
-    "material-ui": "^0.15.2",
-    "react-addons-css-transition-group": "^15.3.0",
+    "material-ui": "^0.16.1",
     "react-color": "^2.2.2",
     "react-tap-event-plugin": "^1.0.0",
     "redux-thunk": "^2.1.0",

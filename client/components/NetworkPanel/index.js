@@ -28,6 +28,30 @@ export default class NetworkPanel extends Component {
     }
   }
 
+  getError() {
+    return (
+      <div className={style.container}>
+        <h1>A Problem Occurred While Downloading Data</h1>
+        <h2>Possible Causes:</h2>
+        <h3>Invalid URL</h3>
+        <h3>Invalid NDEx ID</h3>
+        <h3>Remote server is down</h3>
+        <ErrorIcon
+          color={'#ff0033'}
+          style={{width: '40%', height: '40%'}}
+        />
+
+        <FlatButton
+          label="Back to Data Source Selector"
+          labelPosition='after'
+          labelStyle={{fontWeight: 700}}
+          icon={<BackIcon/>}
+          onClick={this.handleBack}
+        />
+      </div>
+    )
+  }
+
   render() {
     const {
       commands, commandActions, events, networkDownload,
@@ -36,10 +60,9 @@ export default class NetworkPanel extends Component {
     } = this.props
 
     let errorMsg = networkDownload.get('error')
-
     let failed = false
 
-    if (errorMsg === null || errorMsg === undefined) {
+    if ( errorMsg === null || errorMsg === undefined) {
       failed = false
     } else {
       failed = true
@@ -48,27 +71,7 @@ export default class NetworkPanel extends Component {
     const network = this.props.networks.get(networkId)
 
     if (failed) {
-      return (
-        <div className={style.container}>
-          <h1>A Problem Occurred While Downloading Data</h1>
-          <h2>Possible Causes:</h2>
-          <h3>Invalid URL</h3>
-          <h3>Invalid NDEx ID</h3>
-          <h3>Remote server is down</h3>
-          <ErrorIcon
-            color={'#ff0033'}
-            style={{width: '40%', height: '40%'}}
-          />
-
-          <FlatButton
-            label="Back to Data Source Selector"
-            labelPosition='after'
-            labelStyle={{fontWeight: 700}}
-            icon={<BackIcon/>}
-            onClick={this.handleBack}
-          />
-        </div>
-      )
+      return this.getError()
     } else if (network !== undefined) {
       return (
         <CytoscapeRenderer

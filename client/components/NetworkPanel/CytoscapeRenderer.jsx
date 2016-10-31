@@ -6,6 +6,7 @@ import style from './style.css'
 const DEF_LAYOUT = 'preset'
 const LAYOUT = 'cose'
 
+
 const CY_EVENTS = {
   select: "select",
   unselect: 'unselect',
@@ -26,9 +27,6 @@ export default class CytoscapeRenderer extends React.Component {
 
 
   updateCyjs(networkData) {
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Cytoscape.js is rendering new network...')
-    console.log(this.props)
-
     if(networkData === undefined || networkData === null) {
       return;
     }
@@ -106,7 +104,6 @@ export default class CytoscapeRenderer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('CYJS NEW PROPS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     const command = nextProps.commands.command
     if(command !== '') {
       const cy = this.state.cyjs
@@ -153,19 +150,6 @@ export default class CytoscapeRenderer extends React.Component {
     }
   }
 
-  render() {
-    const bgc = this.props.backgroundColor.get('backgroundColor')
-
-    // Just add a div tag for Cytoscape.js.
-    // Cytoscape.js can render result only when this section is available in DOM.
-    return (
-      <div
-        id={this.props.rendId}
-        className={style.cy}
-        style={{backgroundColor: bgc}}
-      />
-    )
-  }
 
   setEventListener(cy) {
     cy.on('data select unselect add remove', ev => {
@@ -182,5 +166,20 @@ export default class CytoscapeRenderer extends React.Component {
           break
       }
     })
+  }
+
+
+  render() {
+    const bgc = this.props.backgroundColor.get('backgroundColor')
+
+    // Just add a div tag for Cytoscape.js.
+    // Cytoscape.js can render result only when this section is available in DOM.
+    return (
+      <div
+        id={this.props.rendId}
+        className={style.cy}
+        style={{backgroundColor: bgc}}
+      />
+    )
   }
 }
