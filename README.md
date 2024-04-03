@@ -1,3 +1,5 @@
+# This project has been subsumed by the [Cytoscape Web](https://github.com/cytoscape/cytoscape-web) and [Network Data Exchange](https://www.ndexbio.org) (NDEx) projects.  
+
 # _web.cytoscape_ Prototype
 
 ## Introduction
